@@ -1,0 +1,471 @@
+@mixin swish {
+	transition-duration: 0.2s;
+}
+
+@mixin clickable {
+	// cursor: url('/images/commons/cursors/hover.png'), pointer;
+	cursor: pointer;
+}
+
+@mixin background {
+	background-position: center;
+	background-repeat: no-repeat;
+
+	&.bg-left-- {
+		background-position: left;
+	}
+}
+
+@mixin wrapper {
+	width: calc(100% - #{$wrapper-gutter} * 2);
+	max-width: $wrapper-width;
+	padding: $wrapper-gutter;
+	margin: 0 auto;
+}
+
+@mixin toggleable {
+	@include swish;
+
+	&:not(.toggled--) {
+		display: none;
+	}
+
+	&:not(.visible--) {
+		opacity: 0;
+	}
+}
+
+@mixin pixel-art {
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-crisp-edges;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+@mixin container-row {
+	flex-direction: row;
+	align-items: center;
+	text-align: left;
+
+	&.row-centre-- {
+		justify-content: center;
+		text-align: center;
+	}
+
+	&.row-wrap-- {
+		flex-wrap: wrap;
+	}
+
+	&.row-top-- {
+		align-items: flex-start;
+	}
+
+	// &.row-left-- {
+	// 	justify-content: flex-start;
+	// 	text-align: left;
+	// }
+
+	&.row-right-- {
+		justify-content: flex-end;
+		text-align: right;
+	}
+
+	&.row-bottom-- {
+		align-items: flex-end;
+	}
+}
+
+@mixin container-col {
+	flex-direction: column;
+	align-items: flex-start;
+
+	&.col-top-- {
+		justify-content: flex-start;
+	}
+
+	&.col-centre-- {
+		align-items: center;
+		text-align: center;
+	}
+
+	&.col-right-- {
+		align-items: flex-end;
+		text-align: right;
+	}
+
+	&.col-middle-- {
+		justify-content: center;
+	}
+
+	&.col-bottom-- {
+		justify-content: flex-end;
+	}
+
+	&.col-wrap-- {
+		flex-wrap: wrap;
+	}
+}
+
+@mixin parent-col-top($parent-mg) {
+	> a,
+	> div,
+	> img,
+	> span,
+	> input,
+	> :global(a),
+	> :global(div),
+	> :global(img) {
+		&:not(:first-child) {
+			margin-top: $parent-mg;
+		}
+	}
+}
+
+@mixin parent-col-bottom($parent-mg) {
+	> a,
+	> div,
+	> img,
+	> span,
+	> input,
+	> :global(a),
+	> :global(div),
+	> :global(img) {
+		&:not(:last-child) {
+			margin-bottom: $parent-mg;
+		}
+	}
+}
+
+@mixin parent-col-both($parent-mg) {
+	> a,
+	> div,
+	> img,
+	> span,
+	> input,
+	> :global(a),
+	> :global(div),
+	> :global(img) {
+		margin-top: $parent-mg;
+		margin-bottom: $parent-mg;
+	}
+}
+
+@mixin parent-row-left($parent-mg) {
+	> a,
+	> div,
+	> img,
+	> span,
+	> input,
+	> :global(a),
+	> :global(div),
+	> :global(img) {
+		&:not(:first-child) {
+			margin-left: $parent-mg;
+		}
+	}
+}
+
+@mixin parent-row-right($parent-mg) {
+	> a,
+	> div,
+	> img,
+	> span,
+	> input,
+	> :global(a),
+	> :global(div),
+	> :global(img) {
+		&:not(:last-child) {
+			margin-right: $parent-mg;
+		}
+	}
+}
+
+@mixin parent-row-both($parent-mg) {
+	> a,
+	> div,
+	> img,
+	> span,
+	> input,
+	> :global(a),
+	> :global(div),
+	> :global(img) {
+		margin-left: $parent-mg;
+		margin-right: $parent-mg;
+	}
+}
+
+@mixin hover-forward($scale) {
+	&:not(.no-hover--):hover {
+		transform: scale(#{$scale});
+	}
+}
+
+@mixin hover-up($em) {
+	&:not(.no-hover--) {
+		position: relative;
+		top: 0;
+	
+		&:hover {
+			top: $em;
+			filter: saturate(90%);
+		}
+	}
+}
+
+@mixin card-background($colour-1, $alpha-1, $colour-2, $alpha-2, $degree) {
+	background: linear-gradient($degree, rgba($colour-1, $alpha-1), rgba($colour-2, $alpha-2));
+}
+
+@mixin card-border($width, $colour, $alpha) {
+	border: $width solid rgba($colour, $alpha);
+}
+@mixin card-fill($color) {
+	--bg-a1: 0.95;
+	--bg-a2: 0.95;
+	--bg-1: #{$color} !important;
+	--bg-2: #{$color} !important;
+}
+
+// text
+
+@mixin custom-text {
+	font-family: $ff-custom;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	line-height: 1em;
+}
+
+// card
+
+// @mixin custom-card {
+// 	--bg-1: #{$default-black};
+// 	--bg-2: #{$default-black};
+// 	--bg-a1: 0.6;
+// 	--bg-a2: 0.8;
+// 	--bd-r: 0.3em;
+// 	// --bd: #{$default-white};
+// 	--bd-a: 0.1;
+// 	--bd-w: 0.14em;
+// 	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+// 	@include hover-forward(1.04);
+// }
+
+// animation
+
+@mixin pulse-once($colour-hex)  {
+	animation: pulse-once-animation 0.5s;
+
+	@keyframes pulse-once-animation {
+    0% {
+      box-shadow: 0em 0em 0em 0em rgba($colour-hex, 0.3);
+    }
+
+    100% {
+      box-shadow: 0em 0em 0.8em 0.8em rgba($colour-hex, 0);
+    }
+  }
+}
+
+@mixin pulse($colour-hex)  {
+	animation: pulse-animation 1s infinite;
+
+	@keyframes pulse-animation {
+    0% {
+      box-shadow: 0em 0em 0em 0em rgba($colour-hex, 0.3);
+    }
+
+    100% {
+      box-shadow: 0em 0em 0.8em 0.8em rgba($colour-hex, 0);
+    }
+  }
+}
+
+// connect
+
+@mixin connect-button {
+	--colour-hex: #{$white-hex};
+	--colour: #{$white};
+	--bg-a1: 0.05;
+	--bg-a2: 0.05;
+
+	&.c-add-- {
+		// todo
+	}
+
+	> :global(.wallet-adapter-button) {
+		height: 100%;
+		width: 100%;
+		line-height: 1em;
+		font-size: 1em;
+		justify-content: center !important;
+		background-color: transparent !important;
+		font-family: $ff-base;
+		padding: 0.6em 0.8em;
+		align-items: center;
+		color: var(--colour-hex);
+	}
+	
+	> :global(.wallet-adapter-button .wallet-adapter-button-start-icon) {
+		margin-right: 0.6em;
+		width: unset;
+		height: unset;
+	}
+
+	> :global(.wallet-adapter-button .wallet-adapter-button-start-icon > img) {
+		width: 1.2em;
+		height: 1.2em;
+	}
+
+	> :global(.wallet-adapter-modal) {
+		position: absolute;
+		background-color: rgba($black-hex, 1);
+		// width: 100%;
+		// height: 100%;
+		padding: 1em;
+		padding-right: 0.5em;
+		margin-left: 0em;
+		margin-right: -9em;
+		margin-top: -6em;
+		margin-bottom: -6em;
+		border: 0.13em solid rgba(var(--colour), 0.3);
+		border-radius: 0.2em;
+	}
+
+	> :global(.wallet-adapter-modal *) {
+		font-family: $ff-base;
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-modal-container) {
+		margin: 0;
+		min-height: unset;
+		// padding-top: 1em;
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-modal-wrapper) {
+		background: none;
+		margin-bottom: -1em;
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-modal-button-close) {
+		font-size: 0.55em;
+		top: -0.2em;
+		right: -0.2em;
+		padding: 0.7em;
+		border: 0.13em solid rgba($white-hex, 0.2);
+		border-radius: 0.2em;		
+		background-color: rgba($white-hex, 0.05);
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-modal-title) {
+		font-size: 0.6em;
+		line-height: 1.3em;
+		padding: 0;
+		padding-right: 4em;
+		text-align: left;
+		opacity: 0.7;
+		color: var(--colour-hex);
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-modal-list) {
+		padding-top: 1em;
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-button) {
+		font-size: 0.8em;
+		height: unset;
+		padding: 0.2em;
+		border-radius: 0.6em;
+		line-height: 1em;
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-button > span) {
+		font-size: 0.6em;
+		color: var(--colour-hex);
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-button-start-icon) {
+		margin-right: 0.3em;
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-button-start-icon > img) {
+		width: 1.4em;
+		height: 1.4em;
+	}
+
+	> :global(.wallet-adapter-modal .wallet-adapter-modal-list-more) {
+		display: none;
+	}
+
+	> :global(.wallet-adapter-dropdown) {
+		// none
+	}
+	
+	> :global(.wallet-adapter-dropdown .wallet-adapter-button) {
+		background-color: transparent;
+		font-family: $ff-base;
+		color: var(--colour-hex);
+		height: 100%;
+		width: 100%;
+		line-height: 1em;
+		font-size: 1em;
+		padding: 0.6em 0.8em;
+	}
+	
+	> :global(.wallet-adapter-dropdown .wallet-adapter-button *) {
+		font-family: $ff-base;
+	}
+
+	> :global(.wallet-adapter-dropdown .wallet-adapter-button > i) {
+		margin-right: 0.6em;
+		width: unset;
+		height: unset;
+	}
+
+	> :global(.wallet-adapter-dropdown .wallet-adapter-button > i > img) {
+		width: 1.2em;
+		height: 1.2em;
+	}
+
+	> :global(.wallet-adapter-dropdown .wallet-adapter-dropdown-list) {
+		padding: 0.6em;
+		width: calc(100% - 0.6em * 2);
+		border: 0.13em solid rgba(var(--colour), 0.3);
+		border-radius: 0.2em;
+		background-color: rgba($black-hex, 1);
+		grid-row-gap: 0;
+	}
+
+	> :global(.wallet-adapter-dropdown .wallet-adapter-dropdown-list-item) {
+		height: unset;
+		text-align: left;
+		justify-content: flex-start;
+		font-size: 0.65em;
+		padding: 0.6em 0.4em;
+		border-radius: 0.2em;
+		color: var(--colour-hex);
+		opacity: 0.8;
+		white-space: normal;
+	}
+}
+
+@mixin no-scrollbar {
+	&::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
+}
+
+@mixin small-scrollbar {
+	&::-webkit-scrollbar {
+		width: 0.15em;
+		height: 0.15em;
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		background: rgba($white-hex, 0.3);
+	}
+	
+	&::-webkit-scrollbar-track {
+		background: rgba($white-hex, 0);
+	}
+}

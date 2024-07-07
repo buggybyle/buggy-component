@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&family=Rubik:wght@500&display=swap");
+
+// @font-face {
+// 	font-family: 'ComputerPixel7';
+// 	src: url('/fonts/ComputerPixel7.ttf') format('truetype');
+// }
+
+$wrapper-gutter: 20px;
+$wrapper-width: 1200px;
+
+$black-hex: #000000;
+$black: 0, 0, 0;
+$blue-hex: #689FFE;
+$blue: 104, 159, 254;
+$green-hex: #20D474;
+$green: 32, 212, 116;
+$orange-hex: #FEA068;
+$orange: 254, 160, 104;
+$red-hex: #E5286D;
+$red: 229, 40, 109;
+$white-hex: #fff;
+$white: 255, 255, 255;
+$yellow-hex: #F3BD3D;
+$yellow: 243, 189, 61;
+
+$bp-sm: 640px;
+$bp-md: 800px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+$ff-base: 'DM Sans';
+$ff-alpha: 'DM Sans';
+$ff-style: 'DM Sans';
+$ff-custom: 'DM Sans';
+
+// $white-box-shadow: 0 0 50px -20px rgba($white-hex, 0.2);
+// $white-drop-shadow: 0 0 50px rgba($white-hex, 0.2);
+// $box-shadow: 0 0 30px -5px rgba($black-hex, 0.2);
+// $drop-shadow: 0 0 50px rgba($black-hex, 0.2);
+// $white-box-shadow-heavy: 0 0 100px 10px rgba($white-hex, 0.8);
+// $box-shadow-heavy: 0 0 100px 10px rgba($black-hex, 0.8);
+
+$zi-window: 10;
