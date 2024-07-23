@@ -1,13 +1,13 @@
 {
-	"name": "ollesvege",
-	"version": "0.0.8",
-	"description": "A boilerplate package component built with SvelteKit.",
+	"name": "buggybyle",
+	"version": "0.0.0",
+	"description": "Buggy.so component.",
 	"keywords": [
 		"boilerplate",
 		"sveltekit"
 	],
-	"homepage": "https://github.com/lefrost/ollesvege",
-	"bugs": "https://github.com/lefrost/ollesvege/issues",
+	"homepage": "https://github.com/buggybyle/buggy-component",
+	"bugs": "https://github.com/buggybyle/buggy-component/issues",
 	"license": "MIT",
 	"author": {
 		"name": "Lefrost",
@@ -19,10 +19,10 @@
 	"exports": {
 		"./package.json": "./package.json",
 		".": "./package/pkg/index.js",
-		"./Ollesvege.svelte": {
-			"types": "./package/pkg/Ollesvege.svelte.d.ts",
-			"svelte": "./package/pkg/Ollesvege.svelte",
-			"default": "./package/pkg/Ollesvege.svelte"
+		"./Buggy.svelte": {
+			"types": "./package/pkg/Buggy.svelte.d.ts",
+			"svelte": "./package/pkg/Buggy.svelte",
+			"default": "./package/pkg/Buggy.svelte"
 		}
 	},
 	"typesVersions": {
@@ -30,8 +30,8 @@
 			"index.d.ts": [
 				"./package/pkg/index.d.ts"
 			],
-			"Ollesvege.svelte": [
-				"./package/pkg/Ollesvege.svelte.d.ts"
+			"Buggy.svelte": [
+				"./package/pkg/Buggy.svelte.d.ts"
 			]
 		}
 	},
@@ -73,6 +73,7 @@
 		"buffer": "^6.0.3",
 		"esm-env": "^1.0.0",
 		"jwt-decode": "^4.0.0",
+		"lodash-es": "^4.17.21",
 		"moment": "^2.29.4",
 		"moment-timezone": "^0.5.39",
 		"sass": "^1.49.0",

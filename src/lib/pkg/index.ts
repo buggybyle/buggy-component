@@ -1,1 +1,1 @@
-export { default as Ollesvege } from './Ollesvege.svelte';
+export { default as Buggy } from './Buggy.svelte';

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import moment_tz from 'moment-timezone';
-import _ from 'lodash';
+import _ from 'lodash-es';
 
 import { FALLBACK_USER_IMAGE } from './vars.js';
 

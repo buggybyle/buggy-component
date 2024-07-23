@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Ollesvege from '../lib/pkg/Ollesvege.svelte';
+	import Buggy from '../lib/pkg/Buggy.svelte';
 </script>
 
-<Ollesvege
-	sample_text="Local test"
+<Buggy
+	api_key="tba"
 />
 
 <style lang="scss">
