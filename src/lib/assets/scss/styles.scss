@@ -327,7 +327,8 @@
 // ---- disabled
 
 .disabled {
-	opacity: 0.35 !important;
+	// opacity: 0.35 !important;
+	filter: brightness(0.35) !important;
 	pointer-events: none !important;
 }
 
