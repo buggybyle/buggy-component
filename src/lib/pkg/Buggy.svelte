@@ -17,8 +17,8 @@
 	// consts
 
 	const IN_MAINTENANCE = false;
-	const SUBMISSION_BODY_MIN_LENGTH = 3;
-	const SUBMISSION_BODY_MAX_LENGTH = 150;
+	const DEFAULT_SUBMISSION_BODY_MIN_LENGTH = 3;
+	const DEFAULT_SUBMISSION_BODY_MAX_LENGTH = 150;
 
 	let SUBMISSION_TYPES = [];
 
@@ -28,13 +28,16 @@
 	let is_toggled = false;
 	let data;
 	let project;
+	let project_submission_types = [`bug`, `idea`];
+	let submission_min_length = DEFAULT_SUBMISSION_BODY_MIN_LENGTH;
+	let submission_max_length = DEFAULT_SUBMISSION_BODY_MAX_LENGTH;
 	let theme = `dark`; // <`dark`, `light`, ...>
 	let x_position = `right`; // <`left`, `right`>
 	let x_offset_px = 0;
 	let y_position = `bottom`; // <`top`, `bottom`>
 	let y_offset_px = 0;
 	let submission_input = {
-		type: `bug`,
+		type: project_submission_types.slice()[0] || ``,
 		body: ``
 	}
 	let view = `main`; // <`main`, `submitted`>
@@ -54,9 +57,9 @@
 			is_active = true;
 		}
 
-		resetSubmissionInput();
-
 		await getData();
+
+		resetSubmissionInput();
 	});
 
 	onDestroy(() => {
@@ -95,6 +98,10 @@
 				project = utils.clone(data) || null;
 
 				if (project && project.id) {
+					project_submission_types = project.submission_types || [];
+					submission_min_length = project.submission_min_length || DEFAULT_SUBMISSION_BODY_MIN_LENGTH;
+					submission_max_length = project.submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH;
+
 					let component_config = project.component_config || {};
 					theme = component_config.theme || `dark`;
 					x_position = component_config.x_position || `right`;
@@ -121,7 +128,7 @@
 	
 	function resetSubmissionInput() {
 		try {
-			submission_input.type = `bug`;
+			submission_input.type = project_submission_types.slice()[0] || ``;
 			submission_input.body = ``;
 		} catch (e) {
 			console.log(e);
@@ -213,7 +220,7 @@
 					<div class="container  stretch--  row--  row-left--  b-ma__top">
 						<!-- main -> top -> options -->
 						<div class="container  grow--  row--  row-left--  b-ma__to-options">
-							{#each SUBMISSION_TYPES as TYPE}
+							{#each SUBMISSION_TYPES.filter(T => project_submission_types.some(pst => T.code === pst)) as TYPE}
 								<!-- option -->
 								<div
 									class="container  row--  row-centre--  text  text-{TYPE.colour}--  b-ma__to-option"
@@ -247,7 +254,7 @@
 
 						<!-- main -> top -> count -->
 						<div class="b-ma__to-count">
-							{(submission_input.body || ``).trim().length || 0}/{SUBMISSION_BODY_MAX_LENGTH || 0}
+							{(submission_input.body || ``).trim().length || 0}/{submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH}
 						</div>
 					</div>
 
@@ -257,13 +264,13 @@
 						bind:value={submission_input.body}
 						placeholder="Type your {(SUBMISSION_TYPES.find(T => T.code === submission_input.type) || {}).name || `submission`}"
 						class="container  grow--  stretch--  col--  b-ma__input"
-						maxlength={SUBMISSION_BODY_MAX_LENGTH || 0}
+						maxlength={submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH}
 					/>
 
 					<!-- main -> submit -->
 					<div
 						class="container  row--  row-centre--  card  b-ma__submit"
-						class:disabled={!(SUBMISSION_TYPES.some(T => T.code === submission_input.type) && ((submission_input.body || ``).trim().length >= SUBMISSION_BODY_MIN_LENGTH))}
+						class:disabled={!(SUBMISSION_TYPES.some(T => T.code === submission_input.type) && ((submission_input.body || ``).trim().length >= (submission_min_length || DEFAULT_SUBMISSION_BODY_MIN_LENGTH)))}
 						on:click={() => {
 							try {
 								if (!jobs.includes(`submit`)) {
