@@ -322,6 +322,52 @@
 	&.text-yellow-- {
 		--text-colour: #{$yellow};
 	}
+
+	&.text-yellow-dim-- {
+		--text-colour: #{$yellow-dim};
+	}
+}
+
+// svg
+
+.svg {
+	--filter-colour: #{$white-filter};
+
+	filter: var(--filter-colour);
+
+	// colour
+
+	&.svg-black-- {
+		--filter-colour: #{$black-filter};
+	}
+
+	&.svg-blue-- {
+		--filter-colour: #{$blue-filter};
+	}
+
+	&.svg-green-- {
+		--filter-colour: #{$green-filter};
+	}
+
+	&.svg-orange-- {
+		--filter-colour: #{$orange-filter};
+	}
+
+	&.svg-red-- {
+		--filter-colour: #{$red-filter};
+	}
+
+	&.svg-white-- {
+		--filter-colour: #{$white-filter};
+	}
+
+	&.svg-yellow-- {
+		--filter-colour: #{$yellow-filter};
+	}
+	
+	&.svg-yellow-dim-- {
+		--filter-colour: #{$yellow-dim-filter};
+	}
 }
 
 // ---- disabled
@@ -341,13 +387,14 @@
 .card {
 	--bg-1: #{$white};
 	--bg-2: #{$white};
-	--bg-a1: 0;
-	--bg-a2: 0.05;
-	--bg-deg: 90deg;
+	--bg-a1: 1;
+	--bg-a2: 1;
+	// --bg-deg: 90deg;
+	--bg-deg: to bottom;
 	--bd: #{$white};
-	--bd-a: 0;
-	--bd-w: 0em;
-	--bd-r: 0.03em;
+	--bd-a: 0.05;
+	--bd-w: 0.13em;
+	--bd-r: 1.3em;
 	@include swish;
 	top: 0;
 	position: relative;
@@ -394,10 +441,34 @@
 		--bd: #{$green};
 	}
 
+	&.green-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$green-dim};
+		--bd: #{$white};
+	}
+
+	&.green-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$green-dark};
+		--bd: #{$white};
+	}
+
 	&.orange-- {
 		--bg-1: #{$orange};
 		--bg-2: #{$orange};
 		--bd: #{$orange};
+	}
+
+	&.orange-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$orange-dim};
+		--bd: #{$white};
+	}
+
+	&.orange-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$orange-dark};
+		--bd: #{$white};
 	}
 
 	&.red-- {
@@ -406,9 +477,27 @@
 		--bd: #{$red};
 	}
 
+	&.red-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$red-dim};
+		--bd: #{$white};
+	}
+
+	&.red-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$red-dark};
+		--bd: #{$white};
+	}
+
 	&.white-- {
 		--bg-1: #{$white};
 		--bg-2: #{$white};
+		--bd: #{$white};
+	}
+	
+	&.white-dim-- {
+		--bg-1: #{$white};
+		--bg-2: #{$white-dim};
 		--bd: #{$white};
 	}
 
@@ -416,6 +505,18 @@
 		--bg-1: #{$yellow};
 		--bg-2: #{$yellow};
 		--bd: #{$yellow};
+	}
+
+	&.yellow-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$yellow-dim};
+		--bd: #{$white};
+	}
+
+	&.yellow-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$yellow-dark};
+		--bd: #{$white};
 	}
 }
 

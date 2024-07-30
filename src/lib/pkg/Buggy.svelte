@@ -145,7 +145,7 @@
 }
   <!-- buggy -->
   <div
-		class="container  col--  buggy  b-{theme}--  b-{y_position}-{x_position}--"
+		class="container  col--  buggy  b-{y_position}-{x_position}--"
 		style="
 			margin-left: {x_offset_px};
 			margin-top: {y_offset_px};
@@ -154,7 +154,12 @@
 		{#if is_toggled}
 			<!-- main -->
 			<div
-				class="container  stretch--  col--  card  b-main">
+				class="container  stretch--  col--  text  card  b-main"
+				class:text-white--={theme === `dark`}
+				class:yellow-dark--={theme === `dark`}
+				class:text-yellow-dim--={theme === `light`}
+				class:white-dim--={theme === `light`}
+			>
 				{#if view === `submitted`}
 					<!-- main (submitted) -> submitted -->
 					<div class="container  stretch--  col--  b-ma__submitted">
@@ -187,20 +192,26 @@
 						<!-- main (submitted) -> button (claim) -->
 							<a
 								href="https://buggy.so/submission/claim?id={new_submission.id || ``}"
-								class="container  grow--  row--  row-centre--  text  text-yellow--  card  yellow--  b-ma__button"
+								class="container  grow--  row--  row-centre--  text  card  b-ma__button"
+								class:text-white--={theme === `dark`}
+								class:yellow-dim--={theme === `dark`}
+								class:text-yellow-dim--={theme === `light`}
+								class:white-dim--={theme === `light`}
 							>
 								<div>
-									Claim it
-									<span class="text  text-white--">
-										{`on Buggy.so >`}
+									<span class="text  text-yellow--">
+										Claim it
 									</span>
+									{`on Buggy.so >`}
 								</div>
 							</a>
 						{/if}
 
 						<!-- main (submitted) -> button (close) -->
 						<div
-							class="container  row--  row-centre--  text  text-red--  card  red--  b-ma__button"
+							class="container  row--  row-centre--  text  text-red--  card  b-ma__button"
+							class:red-dim--={theme === `dark`}
+							class:white-dim--={theme === `light`}
 							on:click|stopPropagation={() => {
 								try {
 									view = `main`;
@@ -270,6 +281,10 @@
 					<!-- main -> submit -->
 					<div
 						class="container  row--  row-centre--  card  b-ma__submit"
+						class:text-white--={theme === `dark`}
+						class:yellow-dark--={theme === `dark`}
+						class:text-yellow-dim--={theme === `light`}
+						class:white-dim--={theme === `light`}
 						class:disabled={!(SUBMISSION_TYPES.some(T => T.code === submission_input.type) && ((submission_input.body || ``).trim().length >= (submission_min_length || DEFAULT_SUBMISSION_BODY_MIN_LENGTH)))}
 						on:click={() => {
 							try {
@@ -304,6 +319,10 @@
 		<!-- toggle -->
 		<div
 			class="container   row--  row-centre--  card  b-toggle"
+			class:text-white--={theme === `dark`}
+			class:yellow-dark--={theme === `dark`}
+			class:text-yellow-dim--={theme === `light`}
+			class:white-dim--={theme === `light`}
 			on:click={() => {
 				try {
 					is_toggled = !is_toggled;
@@ -316,7 +335,9 @@
 			<img
 				src={face_icon_image}
 				alt=""
-				class="svg  svg-white--  b-to__face"
+				class="svg  b-to__face"
+				class:svg-white--={theme === `dark`}
+				class:svg-yellow-dim--={theme === `light`}
 			/>
 
 			<!-- toggle -> idea -->
@@ -340,13 +361,12 @@
     --bg-a1: 1;
     --bg-a2: 1;
     --bd-w: 0.13em;
-		
-		&.b-dark-- {
-			// tba
-		}
+		width: 100%;
+		max-width: 300px;
+		font-size: 12px;
 
-		&.b-light-- {
-			// tba
+		@media (min-width: $bp-sm) {
+			font-size: 15px;
 		}
 
 		&.b-top-left-- {
@@ -381,7 +401,10 @@
 	// main
 
 	.b-main.card {
-		// tba
+		padding: 0.8em;
+		height: calc(10% - 0.8em * 2);
+		--bd: #{$yellow};
+		--bd-a: 0.15;
 	}
 
 	// main -> submitted
@@ -419,6 +442,11 @@
 
 		> div {
 			// tba
+		}
+
+		&.white-dim-- {
+			--bd: #{$yellow};
+			--bd-a: 0.15;
 		}
 	}
 
@@ -466,12 +494,28 @@
 		> div {
 			// tba
 		}
+
+		&.b-dark-- {
+			// tba
+		}
+
+		&.b-light-- {
+			// tba
+		}
 	}
 
 	// toggle
 
 	.b-toggle.card {
 		// tba
+
+		&.b-dark-- {
+			// tba
+		}
+
+		&.b-light-- {
+			// tba
+		}
 	}
 
 	// toggle -> face

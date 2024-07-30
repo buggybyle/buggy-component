@@ -8,20 +8,62 @@
 $wrapper-gutter: 20px;
 $wrapper-width: 1200px;
 
+// note: hex to filter reference - https://stackoverflow.com/a/53336754 + https://isotropic.co/tool/hex-color-to-css-filter/ OR https://codepen.io/sosuke/pen/Pjoqqp
+
 $black-hex: #000000;
 $black: 0, 0, 0;
-$blue-hex: #689FFE;
+$black-filter: invert(0%) sepia(82%) saturate(7429%) hue-rotate(43deg) brightness(112%) contrast(114%);
+
+$blue-hex: #689FFE; // note: unused
 $blue: 104, 159, 254;
-$green-hex: #20D474;
-$green: 32, 212, 116;
-$orange-hex: #FEA068;
-$orange: 254, 160, 104;
-$red-hex: #E5286D;
-$red: 229, 40, 109;
-$white-hex: #fff;
-$white: 255, 255, 255;
-$yellow-hex: #F3BD3D;
-$yellow: 243, 189, 61;
+$blue-filter: invert(71%) sepia(91%) saturate(3409%) hue-rotate(193deg) brightness(101%) contrast(99%);
+
+$green-hex: #98D62B;
+$green: 152, 214, 43;
+$green-filter: invert(89%) sepia(15%) saturate(2268%) hue-rotate(26deg) brightness(93%) contrast(82%);
+$green-dim-hex: #182904;
+$green-dim: 24, 41, 4;
+$green-dim-filter: invert(12%) sepia(37%) saturate(1811%) hue-rotate(53deg) brightness(90%) contrast(97%);
+$green-dark-hex: #070C01;
+$green-dark: 7, 12, 1;
+$green-dark-filter: invert(5%) sepia(77%) saturate(373%) hue-rotate(44deg) brightness(92%) contrast(102%);
+
+$orange-hex: #FF7B47;
+$orange: 255, 123, 71;
+$orange-filter: invert(51%) sepia(58%) saturate(611%) hue-rotate(329deg) brightness(103%) contrast(101%);
+$orange-dim-hex: #712000;
+$orange-dim: 113, 32, 0;
+$orange-dim-filter: invert(12%) sepia(90%) saturate(2765%) hue-rotate(19deg) brightness(97%) contrast(102%);
+$orange-dark-hex: #271006;
+$orange-dark: 39, 16, 6;
+$orange-dark-filter: invert(8%) sepia(13%) saturate(4001%) hue-rotate(341deg) brightness(95%) contrast(99%);
+
+$red-hex: #FF4848;
+$red: 255, 72, 72;
+$red-filter: invert(35%) sepia(70%) saturate(914%) hue-rotate(320deg) brightness(107%) contrast(110%);
+$red-dim-hex: #431712;
+$red-dim: 67, 23, 18;
+$red-dim-filter: invert(9%) sepia(26%) saturate(4412%) hue-rotate(340deg) brightness(94%) contrast(95%);
+$red-dark-hex: #1D0502;
+$red-dark: 29, 5, 2;
+$red-dark-filter: invert(7%) sepia(37%) saturate(1175%) hue-rotate(326deg) brightness(92%) contrast(105%);
+
+$white-hex: #FFF1C5;
+$white: 255, 241, 197;
+$white-filter: invert(94%) sepia(11%) saturate(1206%) hue-rotate(322deg) brightness(107%) contrast(101%);
+$white-dim-hex: #FFECD8;
+$wihte-dim: 255, 236, 216;
+$white-dim-filter: invert(98%) sepia(68%) saturate(1018%) hue-rotate(296deg) brightness(103%) contrast(118%);
+
+$yellow-hex: #FF9A34;
+$yellow: 255, 154, 52;
+$yellow-filter: invert(81%) sepia(18%) saturate(7140%) hue-rotate(333deg) brightness(100%) contrast(102%);
+$yellow-dim-hex: #63320B;
+$yellow-dim: 99, 50, 11;
+$yellow-dim-filter: invert(19%) sepia(35%) saturate(1591%) hue-rotate(353deg) brightness(100%) contrast(95%);
+$yellow-dark-hex: #301B05;
+$yellow-dark: 48, 27, 5;
+$yellow-dark-filter: invert(10%) sepia(49%) saturate(990%) hue-rotate(354deg) brightness(91%) contrast(97%);
 
 $bp-sm: 640px;
 $bp-md: 800px;
