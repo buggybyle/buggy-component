@@ -410,38 +410,43 @@
 	// main -> submitted
 
 	.b-ma__submitted {
-		// tba
+		// none
 	}
 
 	.b-ma__su-heading {
-		// tba
+		// none
 
 		> div {
-			// tba
+			font-size: 1.05em;
+			padding-right: 0.2em;
 		}
 
 		> img {
-			// tba
+			height: 1.25em;
 		}
 	}
 
 	.b-ma__su-subheading {
-		// tba
+		font-size: 0.75em;
+		opacity: 0.5;
 	}
 
 	// main -> buttons
 
 	.b-ma__buttons {
-		// tba
+		padding-top: 0.8em;
+		@include parent-row-right(0.4em);
 	}
 
 	// main -> button
 	
 	.b-ma__button.card {
-		// tba
+		padding: 0.35em 0.65em 0.3em;
+		@include clickable;
+		@include hover-forward(1.04);
 
 		> div {
-			// tba
+			font-size: 1em;
 		}
 
 		&.white-dim-- {
@@ -453,80 +458,90 @@
 	// main -> top
 
 	.b-ma__top {
-		// tba
+		// none
 	}
 
 	.b-ma__to-options {
-		// tba
+		padding-right: 0.6em;
+		@include parent-row-right(0.5em);
 	}
 
 	.b-ma__to-option {
-		// tba
+		@include clickable;
+		@include hover-forward(1.04);
+		@include swish;
+		opacity: 0.3;
 
 		> img {
-			// tba
+			height: 1.2em;
+			margin-right: 0.25em;
 		}
 
 		> div {
-			// tba
+			font-size: 1.2em;
 		}
 
 		&.b-selected-- {
-			// tba
+			opacity: 1;
+		}
+
+		&:hover {
+			opacity: 0.7;
 		}
 	}
 
 	.b-ma__to-count {
-		// tba
+		font-size: 1em;
+		opacity: 0.3;
 	}
 
 	// main -> input
 
 	.b-ma__input {
-		// tba
+		font-size: 1.2em;
+		@include custom-text;
+		padding-top: 0.2em;
 	}
 
 	// main -> submit
 
 	.b-ma__submit.card {
-		// tba
+		position: absolute;
+		top: calc(100% + 1em);
+		@include clickable;
+		@include hover-forward(1.04);
+		--bd: #{$yellow};
+		--bd-a: 0.15;
+		--bg-deg: to right;
+		padding: 0.4em 0.7em 0.35em;
 
 		> div {
-			// tba
-		}
-
-		&.b-dark-- {
-			// tba
-		}
-
-		&.b-light-- {
-			// tba
+			font-size: 1.7em;
 		}
 	}
 
 	// toggle
 
 	.b-toggle.card {
-		// tba
-
-		&.b-dark-- {
-			// tba
-		}
-
-		&.b-light-- {
-			// tba
-		}
+		@include clickable;
+		@include hover-forward(1.04);
+		--bd: #{$yellow};
+		--bd-a: 0.15;
+		--bg-deg: to top;
+		padding: 0.3em 0.4em;
+		padding-left: 0em;
 	}
 
 	// toggle -> face
 
 	.b-to__face {
-		// tba
+		height: 2em;
+		padding-right: 0.6em;
 	}
 
 	// toggle -> idea
 
 	.b-to__idea {
-		// tba
+		height: 2em;
 	}
 </style>
