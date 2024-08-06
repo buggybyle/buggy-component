@@ -270,8 +270,7 @@
 					</div>
 
 					<!-- main -> input (body) -->
-					<input
-						type="text"
+					<textarea
 						bind:value={submission_input.body}
 						placeholder="Type your {(SUBMISSION_TYPES.find(T => T.code === submission_input.type) || {}).name || `submission`}"
 						class="container  grow--  stretch--  col--  b-ma__input"
