@@ -230,9 +230,9 @@
 
 @mixin custom-text {
 	font-family: $ff-custom;
-	text-transform: uppercase;
-	letter-spacing: 0.02em;
+	letter-spacing: 0.05em;
 	line-height: 1em;
+	font-weight: 400;
 }
 
 // card
