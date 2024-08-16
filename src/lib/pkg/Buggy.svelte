@@ -162,6 +162,7 @@
 				class:yellow-dark--={theme === `dark`}
 				class:text-yellow-dim--={theme === `light`}
 				class:white-dim--={theme === `light`}
+				class:b-submitted--={view === `submitted`}
 			>
 				{#if view === `submitted`}
 					<!-- main (submitted) -> submitted -->
@@ -195,6 +196,7 @@
 						<!-- main (submitted) -> button (claim) -->
 							<a
 								href="https://buggy.so/submission/claim?id={new_submission.id || ``}"
+								target="_blank"
 								class="container  grow--  row--  row-centre--  text  card  b-ma__button"
 								class:text-white--={theme === `dark`}
 								class:yellow-dim--={theme === `dark`}
@@ -294,13 +296,34 @@
 						class:text-yellow-dim--={theme === `light`}
 						class:white-dim--={theme === `light`}
 						class:disabled={!(SUBMISSION_TYPES.some(T => T.code === submission_input.type) && ((submission_input.body || ``).trim().length >= (submission_min_length || DEFAULT_SUBMISSION_BODY_MIN_LENGTH)))}
-						on:click={() => {
+						on:click={async () => {
 							try {
 								if (!jobs.includes(`submit`)) {
 									jobs.push(`submit`);
 									jobs = jobs;
 
 									// tba: adhoc->component_submit --- get resulting new_submission || null
+
+									let component_submit_res = await api.restPost({
+										url: `load`,
+										payload: {
+											type: `component_submit`,
+											obj: {
+												project_id: project.id || ``,
+												origin_url: window.location.origin || ``,
+												type: submission_input.type || ``,
+												body: (submission_input.body || ``).trim() || ``,
+											}
+										}
+									}) || null;
+
+									if (component_submit_res) {
+										new_submission = utils.clone(component_submit_res);
+									} else {
+										new_submission = null;
+									}
+
+									view = `submitted`;
 
 									jobs = jobs.filter(j => j !== `submit`);
 								}
@@ -465,6 +488,10 @@
 		--bg-deg: to bottom;
 		@include pulse($yellow-hex);
 
+		&.b-submitted-- {
+			height: calc(7em - 1em * 2);
+		}
+
 		&:hover {
 			--bd-a: 0.3;
 		}
@@ -480,7 +507,7 @@
 		// none
 
 		> div {
-			font-size: 1.05em;
+			font-size: 1.15em;
 			padding-right: 0.2em;
 		}
 
@@ -490,8 +517,9 @@
 	}
 
 	.b-ma__su-subheading {
-		font-size: 0.75em;
+		font-size: 0.8em;
 		opacity: 0.5;
+		padding-top: 0.3em;
 	}
 
 	// main -> buttons
@@ -504,9 +532,10 @@
 	// main -> button
 	
 	.b-ma__button.card {
-		padding: 0.35em 0.65em 0.3em;
+		padding: 0.4em 0.8em 0.35em;
 		@include clickable;
 		@include hover-forward(1.04);
+		--bg-deg: to right;
 
 		> div {
 			font-size: 1em;
