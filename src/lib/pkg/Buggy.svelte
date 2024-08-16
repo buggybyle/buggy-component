@@ -302,8 +302,6 @@
 									jobs.push(`submit`);
 									jobs = jobs;
 
-									// tba: adhoc->component_submit --- get resulting new_submission || null
-
 									let component_submit_res = await api.restPost({
 										url: `load`,
 										payload: {
