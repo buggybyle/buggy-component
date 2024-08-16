@@ -3,7 +3,7 @@
 </script>
 
 <Buggy
-	api_key="tba"
+	api_key="17322e100ca0e3b7d77c"
 />
 
 <style lang="scss">

@@ -34,6 +34,7 @@
 	outline: none;
 	margin: 0;
 	font-family: $ff-base;
+	font-weight: 600;
 	line-height: 1;
 	scroll-behavior: smooth;
 	letter-spacing: -0.04em;
@@ -42,23 +43,24 @@
 
 /* width */
 :global(::-webkit-scrollbar) {
-	width: 7px;
+	// width: 0.4em;
+	width: 0em;
 }
 
 /* Track */
 :global(::-webkit-scrollbar-track) {
-	background: $white-hex;
+	background: rgba($white-hex, 0);
 }
 
 /* Handle */
 :global(::-webkit-scrollbar-thumb) {
-	background: rgba($white-hex, 0.05);
+	background: rgba($white-hex, 0.1);
 	border-radius: 0.5em;
 }
 
 /* Handle on hover */
 :global(::-webkit-scrollbar-thumb:hover) {
-	background: rgba($white-hex, 0.1);
+	background: rgba($white-hex, 0.2);
 }
 
 /* --- Visibility --- */
@@ -393,7 +395,7 @@
 	--bg-deg: to bottom;
 	--bd: #{$white};
 	--bd-a: 0.05;
-	--bd-w: 0.13em;
+	--bd-w: 0.17em;
 	--bd-r: 1.3em;
 	@include swish;
 	top: 0;
@@ -403,6 +405,8 @@
 		rgba(var(--bg-1), var(--bg-a1)),
 		rgba(var(--bg-2), var(--bg-a2))
 	);
+	@include bordered-background-card;
+	// box-shadow: inset 0 0 0 var(--bd-w) rgba(0,0,0,0.2);
 	border: var(--bd-w) solid rgba(var(--bd), var(--bd-a));
 	border-radius: var(--bd-r);
 
@@ -555,6 +559,8 @@
 // 	}
 // }
 
+// bg
+
 .bg {
 	position: fixed;
 	top: 0;
@@ -566,4 +572,13 @@
 	background-size: cover;
 	background-position: center;
 	opacity: 1;
+}
+
+.bgbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
 }

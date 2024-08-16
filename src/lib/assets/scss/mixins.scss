@@ -235,6 +235,13 @@
 	font-weight: 400;
 }
 
+@mixin code-text {
+	font-family: $ff-code;
+	letter-spacing: -0.02em;
+	line-height: 1.15em;
+	font-weight: 400;
+}
+
 // card
 
 // @mixin custom-card {
@@ -253,29 +260,29 @@
 // animation
 
 @mixin pulse-once($colour-hex)  {
-	animation: pulse-once-animation 0.5s;
+	animation: pulse-once-animation 1.5s;
 
 	@keyframes pulse-once-animation {
     0% {
-      box-shadow: 0em 0em 0em 0em rgba($colour-hex, 0.3);
+      box-shadow: 0em 0em 0em 0em rgba($colour-hex, 0.4);
     }
 
     100% {
-      box-shadow: 0em 0em 0.8em 0.8em rgba($colour-hex, 0);
+      box-shadow: 0em 0em 20em 2em rgba($colour-hex, 0);
     }
   }
 }
 
 @mixin pulse($colour-hex)  {
-	animation: pulse-animation 1s infinite;
+	animation: pulse-animation 2s infinite;
 
 	@keyframes pulse-animation {
     0% {
-      box-shadow: 0em 0em 0em 0em rgba($colour-hex, 0.3);
+      box-shadow: 0em 0em 0em 0em rgba($colour-hex, 0.4);
     }
 
     100% {
-      box-shadow: 0em 0em 0.8em 0.8em rgba($colour-hex, 0);
+      box-shadow: 0em 0em 20em 2em rgba($colour-hex, 0);
     }
   }
 }
@@ -467,5 +474,85 @@
 	
 	&::-webkit-scrollbar-track {
 		background: rgba($white-hex, 0);
+	}
+}
+
+// card
+
+@mixin dot-card {
+	aspect-ratio: 1/1;
+	--bd-r: 50%;
+	--bd-w: 0em;
+}
+
+@mixin bordered-background-card {
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 120% 120%;
+}
+
+// image
+
+@mixin icon-image {
+	aspect-ratio: 1/1;
+	border: 0.13em solid rgba($white-hex, 0.05);
+	border-radius: 50%;
+}
+
+// buggy-specific mixins
+
+@mixin indicator-bg($colour-hex) {
+	--bd-w: 0;
+	background: linear-gradient(
+		to right,
+		rgba($black-hex, 0),
+		rgba($black-hex, 0),
+		rgba($colour-hex, 1),
+		rgba($colour-hex, 1),
+		rgba($black-hex, 0),
+		rgba($black-hex, 0)
+	);
+}
+
+@mixin bg-float {
+	animation: bg-float-animation 3s infinite;
+
+	@keyframes bg-float-animation {
+    0% {
+			background-position-y: -0.25em;
+    }
+
+    50% {
+			background-position-y: 0.25em;
+    }
+
+		100% {
+			background-position-y: -0.25em;
+		}
+  }
+}
+
+@mixin input {
+	background: none;
+	border: none;
+	resize: none;
+	// cursor: url('/images/commons/cursors/input.png'), auto;
+	// @include hover-forward(1.02);
+	@include swish;
+	padding: 0.2em;
+	width: 100%;
+
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		// note: don't show type=number arrows (chrome, safari, edge, opera)
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	// note: don't show type=number arrows (firefox)	
+	-moz-appearance: textfield;
+
+	&::placeholder {
+		color: rgba($white-hex, 0.3);
 	}
 }

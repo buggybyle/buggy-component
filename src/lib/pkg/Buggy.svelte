@@ -7,7 +7,7 @@
   import bug_icon_image from '../assets/images/icons/bug.svg';
   import face_icon_image from '../assets/images/icons/face.svg';
   import idea_icon_image from '../assets/images/icons/idea.svg';
-  import rocket_emoji_image from '../assets/images/emojis/rocket.svg';
+  import rocket_emoji_image from '../assets/images/emojis/rocket.png';
   import loader_image from '../assets/images/loader.gif';
 
 	// exports
@@ -84,7 +84,7 @@
 				payload: {
 					type: `component_main`,
 					obj: {
-						origin_url: window.location || ``,
+						origin_url: window.location.origin || ``,
 						project_api_key: api_key || ``
 					}
 				}
@@ -95,7 +95,7 @@
 				
 				Object.freeze(SUBMISSION_TYPES);
 
-				project = utils.clone(data) || null;
+				project = utils.clone(data.project) || null;
 
 				if (project && project.id) {
 					project_submission_types = project.submission_types || [];
@@ -146,6 +146,9 @@
   <!-- buggy -->
   <div
 		class="container  col--  buggy  b-{y_position}-{x_position}--"
+		class:b-toggled--={is_toggled}
+		class:col-left--={x_position === `left`}
+		class:col-right--={x_position === `right`}
 		style="
 			margin-left: {x_offset_px};
 			margin-top: {y_offset_px};
@@ -155,7 +158,7 @@
 			<!-- main -->
 			<div
 				class="container  stretch--  col--  text  card  b-main"
-				class:text-white--={theme === `dark`}
+				class:text-yellow--={theme === `dark`}
 				class:yellow-dark--={theme === `dark`}
 				class:text-yellow-dim--={theme === `light`}
 				class:white-dim--={theme === `light`}
@@ -244,13 +247,13 @@
 										}
 									}}
 								>
-									{#if TYPE === `bug`}
+									{#if TYPE.code === `bug`}
 										<img
 											src={bug_icon_image}
 											alt=""
 											class="svg  svg-{TYPE.colour}--"
 										/>
-									{:else if TYPE === `idea`}
+									{:else if TYPE.code === `idea`}
 										<img
 											src={idea_icon_image}
 											alt=""
@@ -264,7 +267,11 @@
 						</div>
 
 						<!-- main -> top -> count -->
-						<div class="b-ma__to-count">
+						<div
+							class="text  b-ma__to-count"
+							class:text-yellow--={theme === `dark`}
+							class:text-yellow-dim--={theme === `light`}
+						>
 							{(submission_input.body || ``).trim().length || 0}/{submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH}
 						</div>
 					</div>
@@ -272,8 +279,10 @@
 					<!-- main -> input (body) -->
 					<textarea
 						bind:value={submission_input.body}
-						placeholder="Type your {(SUBMISSION_TYPES.find(T => T.code === submission_input.type) || {}).name || `submission`}"
-						class="container  grow--  stretch--  col--  b-ma__input"
+						placeholder="Type your {(SUBMISSION_TYPES.find(T => T.code === submission_input.type) || {}).name || `submission`}..."
+						class="container  grow--  stretch--  col--  text  b-ma__input"
+						class:text-white--={theme === `dark`}
+						class:text-yellow-dim--={theme === `light`}
 						maxlength={submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH}
 					/>
 
@@ -318,6 +327,7 @@
 		<!-- toggle -->
 		<div
 			class="container   row--  row-centre--  card  b-toggle"
+			class:b-toggled--={is_toggled}
 			class:text-white--={theme === `dark`}
 			class:yellow-dark--={theme === `dark`}
 			class:text-yellow-dim--={theme === `light`}
@@ -353,19 +363,21 @@
 	@import '../assets/scss/all.scss';
 
   // buggy
-  .buggy.card {
-		@include hover-forward(1.04);
+	
+  .buggy {
+		@include hover-forward(1.02);
+		@include swish;
     position: fixed;
-    padding: 0.35em 0.6em 0.3em;
-    --bg-a1: 1;
-    --bg-a2: 1;
-    --bd-w: 0.13em;
-		width: 100%;
-		max-width: 300px;
 		font-size: 12px;
 
 		@media (min-width: $bp-sm) {
 			font-size: 15px;
+		}
+		
+		&.b-toggled-- {
+			.b-main.card {
+				width: calc(20em - 1em * 2);
+			}
 		}
 
 		&.b-top-left-- {
@@ -373,6 +385,16 @@
 			left: 2em;
 			bottom: unset;
 			right: unset;
+
+			> .b-main.card {
+				top: 3.5em;
+				left: 0;
+
+				> .b-ma__submit.card {
+					bottom: calc(100% + 0.7em);
+					right: 0;
+				}
+			}
 		}
 
 		&.b-top-right-- {
@@ -380,6 +402,16 @@
 			left: unset;
 			bottom: unset;
 			right: 2em;
+
+			> .b-main.card {
+				top: 3.5em;
+				right: 0;
+
+				> .b-ma__submit.card {
+					bottom: calc(100% + 0.7em);
+					left: 0;
+				}
+			}
 		}
 
 		&.b-bottom-left-- {
@@ -387,6 +419,16 @@
 			left: 2em;
 			bottom: 2em;
 			right: unset;
+
+			> .b-main.card {
+				bottom: 3.5em;
+				left: 0;
+
+				> .b-ma__submit.card {
+					top: calc(100% + 0.7em);
+					right: 0;
+				}
+			}
 		}
 
 		&.b-bottom-right-- {
@@ -394,16 +436,38 @@
 			left: unset;
 			bottom: 2em;
 			right: 2em;
+
+			> .b-main.card {
+				bottom: 3.5em;
+				right: 0;
+
+				> .b-ma__submit.card {
+					top: calc(100% + 0.7em);
+					left: 0;
+				}
+			}
 		}
   }
 
 	// main
 
 	.b-main.card {
-		padding: 0.8em;
-		height: calc(10% - 0.8em * 2);
+		position: absolute;
+		max-width: calc(20em - 1em * 2);
+		padding: 1em;
+		height: calc(10em - 1em * 2);
+		top: unset;
+		bottom: unset;
+		left: unset;
+		right: unset;
 		--bd: #{$yellow};
 		--bd-a: 0.15;
+		--bg-deg: to bottom;
+		@include pulse($yellow-hex);
+
+		&:hover {
+			--bd-a: 0.3;
+		}
 	}
 
 	// main -> submitted
@@ -499,23 +563,36 @@
 	.b-ma__input {
 		font-size: 1.2em;
 		@include custom-text;
-		padding-top: 0.2em;
+		@include input;
+		padding-top: 0.5em;
+		@include no-scrollbar;
 	}
 
 	// main -> submit
 
 	.b-ma__submit.card {
 		position: absolute;
-		top: calc(100% + 1em);
+		top: unset;
+		bottom: unset;
+		left: unset;
+		right: unset;
 		@include clickable;
 		@include hover-forward(1.04);
 		--bd: #{$yellow};
 		--bd-a: 0.15;
 		--bg-deg: to right;
-		padding: 0.4em 0.7em 0.35em;
+		padding: 0.5em 1.3em 0.45em;
 
 		> div {
-			font-size: 1.7em;
+			font-size: 1.5em;
+		}
+
+		&:not(.disabled) {
+			@include pulse($yellow-hex);
+		}
+
+		&:hover {
+			--bd-a: 0.3;
 		}
 	}
 
@@ -523,19 +600,28 @@
 
 	.b-toggle.card {
 		@include clickable;
-		@include hover-forward(1.04);
 		--bd: #{$yellow};
 		--bd-a: 0.15;
 		--bg-deg: to top;
 		padding: 0.3em 0.4em;
 		padding-left: 0em;
+		overflow: hidden;
+
+		&.b-toggled-- {
+			--bd-a: 0.35;
+		}
+
+		&:hover {
+			--bd-a: 0.5;
+		}
 	}
 
 	// toggle -> face
 
 	.b-to__face {
 		height: 2em;
-		padding-right: 0.6em;
+		padding-right: 0.2em;
+		margin-left: -0.5em;
 	}
 
 	// toggle -> idea
