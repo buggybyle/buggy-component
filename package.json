@@ -3,8 +3,9 @@
 	"version": "0.0.5",
 	"description": "Buggy.so component.",
 	"keywords": [
-		"boilerplate",
-		"sveltekit"
+		"buggy.so",
+		"buggybyle",
+		"lefrost"
 	],
 	"homepage": "https://github.com/buggybyle/buggy-component",
 	"bugs": "https://github.com/buggybyle/buggy-component/issues",
