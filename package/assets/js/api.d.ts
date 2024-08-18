@@ -1,0 +1,12 @@
+export function checkSesh(): Promise<void>;
+export function getSocket(): Promise<any>;
+export function setSocket(val: any): Promise<void>;
+export function getIoInstances(): Promise<any>;
+export function setIoInstances(val: any): Promise<void>;
+export function getSesh(): Promise<any>;
+export function getPageCode(): Promise<any>;
+export function setPageCode(val: any): Promise<void>;
+export function getCurrentUser(): Promise<any>;
+export function setCurrentUser(new_user: any, reload: any): void;
+export function logout(): Promise<void>;
+export function restPost(d: any): Promise<any>;

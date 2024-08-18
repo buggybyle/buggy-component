@@ -1,0 +1,584 @@
+@import './mixins.scss';
+
+:global(html) {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	// cursor: url('/images/commons/cursors/default.png'), auto;
+
+	.card:hover {
+		// cursor: url('/images/commons/cursors/hover.png'), auto;
+	}
+
+	.input:hover {
+		// cursor: url('/images/commons/cursors/input.png'), auto;
+	}
+}
+
+:global(body),
+:global(#svelte) {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	position: relative;
+	background-color: $black-hex;
+	color: $white-hex;
+}
+
+:global(a) {
+	color: inherit;
+	text-decoration: none;
+}
+
+:global(*) {
+	outline: none;
+	margin: 0;
+	font-family: $ff-base;
+	font-weight: 600;
+	line-height: 1;
+	scroll-behavior: smooth;
+	letter-spacing: -0.04em;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* width */
+:global(::-webkit-scrollbar) {
+	// width: 0.4em;
+	width: 0em;
+}
+
+/* Track */
+:global(::-webkit-scrollbar-track) {
+	background: rgba($white-hex, 0);
+}
+
+/* Handle */
+:global(::-webkit-scrollbar-thumb) {
+	background: rgba($white-hex, 0.1);
+	border-radius: 0.5em;
+}
+
+/* Handle on hover */
+:global(::-webkit-scrollbar-thumb:hover) {
+	background: rgba($white-hex, 0.2);
+}
+
+/* --- Visibility --- */
+
+.visibility {
+	&, &.v-inline-- {
+		display: none !important;
+	}
+
+	&.sm-down--,
+	&.md-down--,
+	&.lg-down--,
+	&.xl-down-- {
+		display: flex !important;
+
+		&.v-inline-- {
+			display: inline !important;
+		}
+	}
+}
+
+@media (min-width: $bp-sm) {
+	.visibility {
+		&.sm-down-- {
+			&, &.v-inline-- {
+				display: none !important;
+			}
+		}
+
+		&.sm-up--,
+		&.md-down--,
+		&.lg-down--,
+		&.xl-down-- {
+			display: flex !important;
+
+			&.v-inline-- {
+				display: inline !important;
+			}
+		}
+	}
+}
+
+@media (min-width: $bp-md) {
+	.visibility {
+		&.md-down-- {
+			&, &.v-inline-- {
+				display: none !important;
+			}
+		}
+
+		&.md-up--,
+		&.lg-down--,
+		&.xl-down-- {
+			display: flex !important;
+
+			&.v-inline-- {
+				display: inline !important;
+			}
+		}
+	}
+}
+
+@media (min-width: $bp-lg) {
+	.visibility {
+		&.lg-down-- {
+			&, &.v-inline-- {
+				display: none !important;
+			}
+		}
+
+		&.lg-up--,
+		&.xl-down-- {
+			display: flex !important;
+
+			&.v-inline-- {
+				display: inline !important;
+			}
+		}
+	}
+}
+
+@media (min-width: $bp-xl) {
+	.visibility {
+		&.xl-down-- {
+			&, &.v-inline-- {
+				display: none !important;
+			}
+		}
+
+		&.xl-up--{
+			display: flex !important;
+
+			&.v-inline-- {
+				display: inline !important;
+			}
+		}
+	}
+}
+
+/* --- Container --- */
+
+.container {
+	// --parent-mg: 1em;
+	display: flex;
+	@include container-row;
+	@include background;
+
+	--scr-w: 0.24em;
+	--scr-tr-a: 0.2;
+	--scr-clr: #{$white};
+	--scr-th-a: 1;
+
+	/* width */
+	&::-webkit-scrollbar {
+		width: var(--scr-w);
+	}
+
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: rgba(var(--scr-clr), var(--scr-tr-a));
+	}
+
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: rgba(var(--scr-clr), var(--scr-th-a));
+		border-radius: 0.5em;
+	}
+
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: rgba($black-hex, 0.8);
+	}
+
+	// don't set parent-mg inside .container (otherwise it'll override, won't work properly), set it in respective .svelte files instead
+
+	&.background-- {
+		width: calc(100% - $wrapper-gutter);
+		margin-top: calc(var(--parent-mg) * 2);
+		margin-left: calc(var(--parent-mg) * 2);
+
+		> div {
+			margin-top: calc(var(--parent-mg) * 2);
+			margin-left: calc(var(--parent-mg) * 2);
+			padding-bottom: calc(var(--parent-mg) * 2);
+			padding-right: calc(var(--parent-mg) * 2);
+		}
+	}
+
+	&.offset-- {
+		margin-left: calc(var(--parent-mg) * 2 * 2) !important;
+
+		@media (min-width: $bp-sm) {
+			margin-left: calc(var(--parent-mg) * 2 * 2) !important;
+		}
+	}
+
+	&.stretch-- {
+		// width: 100%;
+		align-self: stretch;
+	}
+
+	&.grow-- {
+		flex-grow: 1;
+	}
+
+	&.row-sm--,
+	&.row-md--,
+	&.row-lg--,
+	&.row-xl--,
+	&.col-- {
+		@include container-col;
+	}
+
+	&.no-overflow-- {
+		overflow: hidden;
+	}
+}
+
+@media (min-width: $bp-sm) {
+	.container {
+		&.row-sm-- {
+			@include container-row;
+		}
+
+		&.col-sm-- {
+			@include container-col;
+		}
+	}
+}
+
+@media (min-width: $bp-md) {
+	.container {
+		&.row-md-- {
+			@include container-row;
+		}
+
+		&.col-md-- {
+			@include container-col;
+		}
+	}
+}
+
+@media (min-width: $bp-lg) {
+	.container {
+		&.row-lg-- {
+			@include container-row;
+		}
+
+		&.col-lg-- {
+			@include container-col;
+		}
+	}
+}
+
+@media (min-width: $bp-xl) {
+	.container {
+		&.row-xl-- {
+			@include container-row;
+		}
+
+		&.col-xl-- {
+			@include container-col;
+		}
+	}
+}
+
+// ---- Text
+
+.text {
+	--text-colour: #{$white};
+
+	color: rgb(var(--text-colour));
+	// text-shadow: 0 0 0.6em rgba(var(--text-colour), 0.5);
+
+	// colour
+
+	&.text-black-- {
+		--text-colour: #{$black};
+	}
+
+	&.text-blue-- {
+		--text-colour: #{$blue};
+	}
+
+	&.text-green-- {
+		--text-colour: #{$green};
+	}
+
+	&.text-orange-- {
+		--text-colour: #{$orange};
+	}
+
+	&.text-red-- {
+		--text-colour: #{$red};
+	}
+
+	&.text-white-- {
+		--text-colour: #{$white};
+	}
+
+	&.text-yellow-- {
+		--text-colour: #{$yellow};
+	}
+
+	&.text-yellow-dim-- {
+		--text-colour: #{$yellow-dim};
+	}
+}
+
+// svg
+
+.svg {
+	--filter-colour: #{$white-filter};
+
+	filter: var(--filter-colour);
+
+	// colour
+
+	&.svg-black-- {
+		--filter-colour: #{$black-filter};
+	}
+
+	&.svg-blue-- {
+		--filter-colour: #{$blue-filter};
+	}
+
+	&.svg-green-- {
+		--filter-colour: #{$green-filter};
+	}
+
+	&.svg-orange-- {
+		--filter-colour: #{$orange-filter};
+	}
+
+	&.svg-red-- {
+		--filter-colour: #{$red-filter};
+	}
+
+	&.svg-white-- {
+		--filter-colour: #{$white-filter};
+	}
+
+	&.svg-yellow-- {
+		--filter-colour: #{$yellow-filter};
+	}
+	
+	&.svg-yellow-dim-- {
+		--filter-colour: #{$yellow-dim-filter};
+	}
+}
+
+// ---- disabled
+
+.disabled {
+	// opacity: 0.35 !important;
+	filter: brightness(0.35) !important;
+	pointer-events: none !important;
+}
+
+// ---- Card
+
+.image {
+	border-radius: 2px;
+}
+
+.card {
+	--bg-1: #{$white};
+	--bg-2: #{$white};
+	--bg-a1: 1;
+	--bg-a2: 1;
+	// --bg-deg: 90deg;
+	--bg-deg: to bottom;
+	--bd: #{$white};
+	--bd-a: 0.05;
+	--bd-w: 0.17em;
+	--bd-r: 1.3em;
+	@include swish;
+	top: 0;
+	position: relative;
+	background: linear-gradient(
+		var(--bg-deg),
+		rgba(var(--bg-1), var(--bg-a1)),
+		rgba(var(--bg-2), var(--bg-a2))
+	);
+	@include bordered-background-card;
+	// box-shadow: inset 0 0 0 var(--bd-w) rgba(0,0,0,0.2);
+	border: var(--bd-w) solid rgba(var(--bd), var(--bd-a));
+	border-radius: var(--bd-r);
+
+	&.no-hover--:hover {
+		// cursor: url('/images/commons/cursors/default.png'), auto;
+	}
+
+	&.moveup-- {
+		&:hover {
+			z-index: 2;
+		}
+	}
+
+	&.fill-- {
+		--bg-a1: 1;
+		--bg-a2: 1;
+	}
+
+	// colour
+
+	&.black-- {
+		--bg-1: #{$black};
+		--bg-2: #{$black};
+		--bd: #{$black};
+	}
+
+	&.blue-- {
+		--bg-1: #{$blue};
+		--bg-2: #{$blue};
+		--bd: #{$blue};
+	}
+
+	&.green-- {
+		--bg-1: #{$green};
+		--bg-2: #{$green};
+		--bd: #{$green};
+	}
+
+	&.green-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$green-dim};
+		--bd: #{$white};
+	}
+
+	&.green-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$green-dark};
+		--bd: #{$white};
+	}
+
+	&.orange-- {
+		--bg-1: #{$orange};
+		--bg-2: #{$orange};
+		--bd: #{$orange};
+	}
+
+	&.orange-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$orange-dim};
+		--bd: #{$white};
+	}
+
+	&.orange-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$orange-dark};
+		--bd: #{$white};
+	}
+
+	&.red-- {
+		--bg-1: #{$red};
+		--bg-2: #{$red};
+		--bd: #{$red};
+	}
+
+	&.red-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$red-dim};
+		--bd: #{$white};
+	}
+
+	&.red-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$red-dark};
+		--bd: #{$white};
+	}
+
+	&.white-- {
+		--bg-1: #{$white};
+		--bg-2: #{$white};
+		--bd: #{$white};
+	}
+	
+	&.white-dim-- {
+		--bg-1: #{$white};
+		--bg-2: #{$white-dim};
+		--bd: #{$white};
+	}
+
+	&.yellow-- {
+		--bg-1: #{$yellow};
+		--bg-2: #{$yellow};
+		--bd: #{$yellow};
+	}
+
+	&.yellow-dim-- {
+		--bg-1: #{$black};
+		--bg-2: #{$yellow-dim};
+		--bd: #{$white};
+	}
+
+	&.yellow-dark-- {
+		--bg-1: #{$black};
+		--bg-2: #{$yellow-dark};
+		--bd: #{$white};
+	}
+}
+
+// window
+
+.window {
+	@include toggleable;
+	position: fixed;
+	overflow: auto;
+	top: 0;
+	left: 0;
+	width: calc(100% - 2em * 2);
+	height: calc(100% - 2em * 2);
+	padding: 2em;
+	background-color: rgba($black-hex, 0.93);
+	z-index: $zi-window;
+}
+
+// .window-inner {
+// 	overflow: auto;
+// 	max-height: calc(100% - 2em * 2 - $wrapper-gutter * 2);
+// 	width: calc(100% - 1em * 2 - $wrapper-gutter * 2);
+// 	max-width: calc(100% - 1em * 2 - $wrapper-gutter * 2);
+// 	padding: 1em;
+// }
+
+// .window-close {
+// 	padding: 0.3em 0.65em 0.2em;
+// 	--bg-a-1: 0.05;
+// 	--bg-a-2: 0.1;
+// 	@include hover-forward(1.08);
+
+// 	> div {
+// 		font-size: 0.9em;
+// 		font-weight: bold;
+// 	}
+// }
+
+// bg
+
+.bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	// background-image: url('/images/backgrounds/default-1.png');
+	background-size: cover;
+	background-position: center;
+	opacity: 1;
+}
+
+.bgbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+}

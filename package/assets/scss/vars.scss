@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&family=Gochi+Hand:wght@400&family=Fira+Code:wght@600&family=Rubik:wght@500&display=swap");
+
+// @font-face {
+// 	font-family: 'ComputerPixel7';
+// 	src: url('/fonts/ComputerPixel7.ttf') format('truetype');
+// }
+
+$wrapper-gutter: 20px;
+$wrapper-width: 1200px;
+
+// note: hex to filter reference - https://stackoverflow.com/a/53336754 + https://cssfilterconverter.com
+
+$black-hex: #000000;
+$black: 0, 0, 0;
+$black-filter: invert(0%) sepia(82%) saturate(7429%) hue-rotate(43deg) brightness(112%) contrast(114%);
+
+$blue-hex: #689FFE; // note: unused
+$blue: 104, 159, 254;
+$blue-filter: brightness(0) saturate(100%) invert(53%) sepia(81%) saturate(525%) hue-rotate(188deg) brightness(100%) contrast(99%);
+
+$green-hex: #98D62B;
+$green: 152, 214, 43;
+$green-filter: brightness(0) saturate(100%) invert(63%) sepia(95%) saturate(330%) hue-rotate(38deg) brightness(98%) contrast(100%);
+$green-dim-hex: #182904;
+$green-dim: 24, 41, 4;
+$green-dim-filter: brightness(0) saturate(100%) invert(11%) sepia(27%) saturate(1764%) hue-rotate(47deg) brightness(101%) contrast(97%);
+$green-dark-hex: #070C01;
+$green-dark: 7, 12, 1;
+$green-dark-filter: brightness(0) saturate(100%) invert(3%) sepia(10%) saturate(7280%) hue-rotate(55deg) brightness(96%) contrast(99%);
+
+$orange-hex: #FF7B47;
+$orange: 255, 123, 71;
+$orange-filter: brightness(0) saturate(100%) invert(56%) sepia(85%) saturate(1214%) hue-rotate(329deg) brightness(101%) contrast(100%);
+$orange-dim-hex: #712000;
+$orange-dim: 113, 32, 0;
+$orange-dim-filter: brightness(0) saturate(100%) invert(17%) sepia(33%) saturate(3485%) hue-rotate(357deg) brightness(100%) contrast(106%);
+$orange-dark-hex: #271006;
+$orange-dark: 39, 16, 6;
+$orange-dark-filter: brightness(0) saturate(100%) invert(11%) sepia(38%) saturate(645%) hue-rotate(338deg) brightness(97%) contrast(109%);
+
+$red-hex: #FF4848;
+$red: 255, 72, 72;
+$red-filter: brightness(0) saturate(100%) invert(37%) sepia(91%) saturate(2118%) hue-rotate(334deg) brightness(101%) contrast(101%);
+$red-dim-hex: #431712;
+$red-dim: 67, 23, 18;
+$red-dim-filter: brightness(0) saturate(100%) invert(12%) sepia(12%) saturate(4890%) hue-rotate(329deg) brightness(97%) contrast(98%);
+$red-dark-hex: #1D0502;
+$red-dark: 29, 5, 2;
+$red-dark-filter: brightness(0) saturate(100%) invert(5%) sepia(27%) saturate(454%) hue-rotate(334deg) brightness(98%) contrast(105%);
+
+$white-hex: #FFF1C5;
+$white: 255, 241, 197;
+$white-filter: brightness(0) saturate(100%) invert(98%) sepia(6%) saturate(1845%) hue-rotate(328deg) brightness(101%) contrast(99%);
+$white-dim-hex: #FFECD8;
+$white-dim: 255, 236, 216;
+$white-dim-filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(1253%) hue-rotate(309deg) brightness(105%) contrast(102%);
+
+$yellow-hex: #FF9A34;
+$yellow: 255, 154, 52;
+$yellow-filter: brightness(0) saturate(100%) invert(63%) sepia(88%) saturate(606%) hue-rotate(333deg) brightness(101%) contrast(100%);
+$yellow-dim-hex: #63320B;
+$yellow-dim: 99, 50, 11;
+$yellow-dim-filter: brightness(0) saturate(100%) invert(18%) sepia(74%) saturate(973%) hue-rotate(357deg) brightness(94%) contrast(93%);
+$yellow-dark-hex: #301B05;
+$yellow-dark: 48, 27, 5;
+$yellow-dark-filter: brightness(0) saturate(100%) invert(10%) sepia(8%) saturate(6247%) hue-rotate(356deg) brightness(99%) contrast(97%);
+
+$bp-sm: 640px;
+$bp-md: 800px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+$ff-base: 'DM Sans';
+$ff-alpha: 'DM Sans';
+$ff-style: 'DM Sans';
+$ff-custom: 'Gochi Hand';
+$ff-code: 'Fira Code';
+
+// $white-box-shadow: 0 0 50px -20px rgba($white-hex, 0.2);
+// $white-drop-shadow: 0 0 50px rgba($white-hex, 0.2);
+// $box-shadow: 0 0 30px -5px rgba($black-hex, 0.2);
+// $drop-shadow: 0 0 50px rgba($black-hex, 0.2);
+// $white-box-shadow-heavy: 0 0 100px 10px rgba($white-hex, 0.8);
+// $box-shadow-heavy: 0 0 100px 10px rgba($black-hex, 0.8);
+
+$zi-window: 10;
