@@ -66,6 +66,7 @@ async function getData() {
                 type: `component_main`,
                 obj: {
                     origin_url: window.location.origin || ``,
+                    href_url: window.location.href || ``,
                     project_api_key: api_key || ``
                 }
             }
@@ -285,6 +286,7 @@ function resetSubmissionInput() {
 											obj: {
 												project_id: project.id || ``,
 												origin_url: window.location.origin || ``,
+												href_url: window.location.href || ``,
 												type: submission_input.type || ``,
 												body: (submission_input.body || ``).trim() || ``,
 											}
