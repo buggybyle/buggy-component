@@ -1,9 +1,10 @@
 <script lang="ts">
+	const COMPONENT_API_KEY = import.meta.env.VITE_COMPONENT_API_KEY;
 	import Buggy from '../lib/pkg/Buggy.svelte';
 </script>
 
 <Buggy
-	api_key="17322e100ca0e3b7d77c"
+	api_key={COMPONENT_API_KEY}
 />
 
 <style lang="scss">

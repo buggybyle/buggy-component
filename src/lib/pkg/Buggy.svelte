@@ -615,6 +615,11 @@
 
 		> div {
 			font-size: 1.5em;
+
+			> img {
+				height: 1em;
+				margin: -0.2em 0;
+			}
 		}
 
 		&:not(.disabled) {

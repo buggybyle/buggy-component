@@ -1209,6 +1209,10 @@ function resetSubmissionInput() {
 .b-ma__submit.card > div {
   font-size: 1.5em;
 }
+.b-ma__submit.card > div > img {
+  height: 1em;
+  margin: -0.2em 0;
+}
 .b-ma__submit.card:not(.disabled) {
   animation: pulse-animation 2s infinite;
 }
