@@ -980,6 +980,7 @@ function resetSubmissionInput() {
   transition-duration: 0.2s;
   position: fixed;
   font-size: 12px;
+  z-index: 100;
 }
 .buggy:not(.no-hover--):hover {
   transform: scale(1.02);
