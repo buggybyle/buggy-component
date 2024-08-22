@@ -392,6 +392,7 @@
 		@include swish;
     position: fixed;
 		font-size: 12px;
+		z-index: 100;
 
 		@media (min-width: $bp-sm) {
 			font-size: 15px;
