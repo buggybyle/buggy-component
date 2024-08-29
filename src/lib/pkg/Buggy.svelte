@@ -137,6 +137,10 @@
 	}
 </script>
 
+<!-- tba: image upload section in main view -->
+<!-- tba: select custom labels in main view if any available for project -->
+<!-- tba: implement in script version of component -->
+
 {#if
   !IN_MAINTENANCE &&
   !jobs.includes(`get_data`) &&
