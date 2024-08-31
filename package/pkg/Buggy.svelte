@@ -113,6 +113,10 @@ function resetSubmissionInput() {
 }
 </script>
 
+<!-- tba: image upload section in main view -->
+<!-- tba: select custom labels in main view if any available for project -->
+<!-- tba: implement in script version of component -->
+
 {#if
   !IN_MAINTENANCE &&
   !jobs.includes(`get_data`) &&
@@ -388,6 +392,7 @@ function resetSubmissionInput() {
   scroll-behavior: smooth;
   letter-spacing: -0.04em;
   -webkit-tap-highlight-color: transparent;
+  box-sizing: content-box;
 }
 
 /* width */
