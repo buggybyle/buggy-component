@@ -7,6 +7,7 @@
   import bug_icon_image from '../assets/images/icons/bug.svg';
   import face_icon_image from '../assets/images/icons/face.svg';
   import idea_icon_image from '../assets/images/icons/idea.svg';
+	import upload_icon_image from '../assets/images/icons/upload.svg';
   import rocket_emoji_image from '../assets/images/emojis/rocket.png';
   import loader_image from '../assets/images/loader.gif';
 
@@ -38,10 +39,14 @@
 	let y_offset_px = 0;
 	let submission_input = {
 		type: project_submission_types.slice()[0] || ``,
-		body: ``
+		body: ``,
+		attachments: [],
+		custom_labels: []
 	}
 	let view = `main`; // <`main`, `submitted`>
 	let new_submission;
+	let main_attachment_uploader;
+	let main_labels_options_div;
 
 	// dynamics
 	// none
@@ -131,15 +136,13 @@
 		try {
 			submission_input.type = project_submission_types.slice()[0] || ``;
 			submission_input.body = ``;
+			submission_input.attachments = [];
+			submission_input.custom_labels = [];
 		} catch (e) {
 			console.log(e);
 		}
 	}
 </script>
-
-<!-- tba: image upload section in main view -->
-<!-- tba: select custom labels in main view if any available for project -->
-<!-- tba: implement in script version of component -->
 
 {#if
   !IN_MAINTENANCE &&
@@ -273,6 +276,67 @@
 							{/each}
 						</div>
 
+						<!-- main -> top -> upload (input) -->
+						<input
+							type="file"
+							accept="image/*"
+							bind:this={main_attachment_uploader}
+							on:change={async () => {
+								try {
+									if (!jobs.includes(`process_image_attachment`) && main_attachment_uploader.value) {
+										jobs.push(`process_image_attachment`);
+										jobs = jobs;
+										
+										if (submission_input.attachments.length < 5) {
+											// note: upload of file doesn't actually happen until data is sent to backend
+
+											let file = main_attachment_uploader.files[0];
+
+											if (file && (file.size < (2 * 1000 * 1000))) {
+												// note: get `settings_input.new_icon_image_base64` from file
+												let image_base64 = await utils.blobToDataUrl(file, `file`) || ``;
+												
+												if (image_base64) {
+													submission_input.attachments.push({
+														type: `image`,
+														data: {
+															image_base64
+														}
+													});
+													submission_input.attachments = submission_input.attachments;
+												}
+											}
+										}
+
+										main_attachment_uploader.value = null;
+
+										jobs = jobs.filter(j => j !== `process_image_attachment`);
+									}
+								} catch (e) {
+									console.log(e);
+								}
+							}}
+							id="main_attachment_uploader"
+							style="display: none;"
+						/>
+
+						<!-- main -> top -> upload (label) -->
+						<label
+							class="container  row--  row-centre--  card  b-ma__to-upload"
+							class:yellow-dark--={theme === `dark`}
+							class:white-dim--={theme === `light`}
+							class:disabled={submission_input.attachments.length >= 5}
+							for="main_attachment_uploader"
+						>
+							<img
+								src={upload_icon_image}
+								alt=""
+								class="svg"
+								class:svg-yellow--={theme === `dark`}
+								class:svg-yellow-dim--={theme === `light`}
+							/>
+						</label>
+
 						<!-- main -> top -> count -->
 						<div
 							class="text  b-ma__to-count"
@@ -292,6 +356,146 @@
 						class:text-yellow-dim--={theme === `light`}
 						maxlength={submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH}
 					/>
+
+					{#if (submission_input.attachments.filter(a => a.type === `image`).length >= 1)}
+						<!-- main -> attachments -->
+						<div class="container  stretch--  col--  b-ma__attachments">
+							<!-- main -> attachments -> text -->
+							<div class="b-ma__at-text">
+								{submission_input.attachments.filter(a => a.type === `image`).length || 0}
+								images uploaded
+							</div>
+
+							<!-- main -> attachments -> items -->
+							<div class="container  stretch--  row--  row-left--  row-wrap--  b-ma__at-items">
+								{#each submission_input.attachments.filter(a => a.type === `image`) as image_attachment, ai}
+									<!-- item -->
+									<div
+										class="container  row--  row-centre--  text  text-white--  card  black--  b-ma__at-item"
+										on:click={() => {
+											try {
+												let attachment_index = submission_input.attachments.findIndex(a =>
+													(a.type === `image`) &&
+													((a.data || {}).image_base64 === (image_attachment.data || {}).image_base64)
+												);
+
+												if (attachment_index >= 0) {
+													submission_input.attachments.splice(attachment_index, 1);
+													submission_input.attachments = submission_input.attachments;
+												}
+											} catch (e) {
+												console.log(e);
+											}
+										}}
+									>
+										<!-- item -> image -->
+										<img	
+											src={(image_attachment.data || {}).image_base64 || ``}
+											alt=""
+											class="b-ma__at-it-image"
+										/>
+
+										<!-- item -> overlay -->
+										<div class="container  row--  row-centre--  text  text-white--  card  black--  b-ma__at-it-overlay">
+											<div>X</div>
+										</div>
+									</div>
+								{/each}
+							</div>
+						</div>
+					{/if}
+
+					{#if (project.custom_labels || []).length >= 1}
+						<!-- main -> labels -->
+						<div class="container  stretch--  col--  b-ma__labels">
+							<!-- main -> labels -> top -->
+							<div class="container  stretch--  row--  row-left--  b-ma__la-top">
+								<!-- main -> labels -> top -> text -->
+								<div class="b-ma__la-to-text">
+									Select labels
+								</div>
+
+								<!-- main -> labels -> top -> actions -->
+								<div class="container  grow--  row--  row-right--  b-ma__la-to-actions">
+									<!-- main -> labels -> top -> action (left) -->
+									<div
+										class="container  row--  row-centre--  b-ma__la-to-action"
+										on:click={() => {
+											try {
+												main_labels_options_div.scrollLeft -= 100;
+
+												if (main_labels_options_div.scrollLeft < 0) {
+													main_labels_options_div.scrollLeft = 0;
+												}
+											} catch (e) {
+												console.log(e);
+											}
+										}}
+									>
+										<div>←</div>
+									</div>
+
+									<!-- main -> labels -> top -> action (right) -->
+									<div
+										class="container  row--  row-centre-  b-ma__la-to-action"
+										on:click={() => {
+											try {
+												main_labels_options_div.scrollLeft += 100;
+
+												let max_scroll_left = main_labels_options_div.scrollWidth - main_labels_options_div.clientWidth;
+
+												if (main_labels_options_div.scrollLeft > max_scroll_left) {
+													main_labels_options_div.scrollLeft = max_scroll_left;
+												}
+											} catch (e) {
+												console.log(e);
+											}
+										}}
+									>
+										<div>→</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- main -> labels -> options -->
+							<div
+								bind:this={main_labels_options_div}
+								class="container  stretch--  row--  row-left--  b-ma__la-options"
+							>
+								{#each (project.custom_labels || []) as custom_label}
+									<!-- option -->
+									<div
+										class="container  row--  row-centre--  text  card  b-ma__la-option"
+										class:text-white--={theme === `dark`}
+										class:yellow-dark--={theme === `dark`}
+										class:text-yellow-dim--={theme === `light`}
+										class:white-dim--={theme === `light`}
+										class:b-selected--={submission_input.custom_labels.includes(custom_label.text)}
+										on:click={() => {
+											try {
+												if (submission_input.custom_labels.includes(custom_label.text)) {
+													submission_input.custom_labels = submission_input.custom_labels.filter(code => code !== custom_label.text);
+												} else {
+													submission_input.custom_labels.push(utils.clone(custom_label).text || ``);
+													submission_input.custom_labels = submission_input.custom_labels;
+												}
+											} catch (e) {
+												console.log(e);
+											}
+										}}
+									>
+										<div class="container  row--  row-centre--  card  {custom_label.colour}--" />
+										<div>
+											{utils.shortenString({
+												string: custom_label.text || ``,
+												length: 20
+											}) || `n/a`}
+										</div>
+									</div>
+								{/each}
+							</div>
+						</div>
+					{/if}
 
 					<!-- main -> submit -->
 					<div
@@ -317,6 +521,12 @@
 												href_url: window.location.href || ``,
 												type: submission_input.type || ``,
 												body: (submission_input.body || ``).trim() || ``,
+												attachments: (submission_input.attachments || []).slice(0, 5) || [],
+												custom_labels: (submission_input.custom_labels || []).filter(code =>
+													((project || {}).custom_labels || []).some(pl =>
+														pl.text === code
+													)
+												) || []
 											}
 										}
 									}) || null;
@@ -482,8 +692,9 @@
 	.b-main.card {
 		position: absolute;
 		max-width: calc(20em - 1em * 2);
-		padding: 1em;
-		height: calc(10em - 1em * 2);
+		padding: 0.7em 1em;
+		height: fit-content;
+		// height: calc(11em - 1em * 2);
 		top: unset;
 		bottom: unset;
 		left: unset;
@@ -494,7 +705,7 @@
 		@include pulse($yellow-hex);
 
 		&.b-submitted-- {
-			height: calc(7em - 1em * 2);
+			// height: calc(7em - 1em * 2);
 		}
 
 		&:hover {
@@ -587,6 +798,19 @@
 		}
 	}
 
+	.b-ma__to-upload.card {
+		margin-right: 0.5em;
+		padding: 0.5em;
+		border-radius: 50%;
+		--bd-a: 0.1;
+		@include clickable;
+		@include hover-forward(1.04);
+
+		> img {
+			height: 0.95em;
+		}
+	}
+
 	.b-ma__to-count {
 		font-size: 1em;
 		opacity: 0.3;
@@ -600,6 +824,150 @@
 		@include input;
 		padding-top: 0.5em;
 		@include no-scrollbar;
+		height: 5em;
+	}
+
+	// main -> attachments
+
+	.b-ma__attachments {
+		padding-top: 0.6em;
+	}
+
+	.b-ma__at-text {
+		font-size: 0.85em;
+		opacity: 0.5;
+	}
+
+	.b-ma__at-items {
+		padding-top: 0.3em;
+		margin-right: -0.45em;
+		margin-bottom: -0.4em;
+	}
+
+	.b-ma__at-item.card {
+		margin-right: 0.45em;
+		margin-bottom: 0.4em;
+		@include clickable;
+		@include hover-forward(1.04);
+		--bg-a1: 0;
+		--bg-a2: 0;
+		--bd: #{$yellow};
+		--bd-a: 0.2;
+		overflow: hidden;
+
+		&:hover {
+			// none
+			
+			> .b-ma__at-it-overlay.card {
+				opacity: 1;
+			}
+		}
+	}
+
+	.b-ma__at-it-image {
+		height: 2em;
+		max-width: 5em;
+	}
+
+	.b-ma__at-it-overlay.card {
+		z-index: 1;
+		--bg-a1: 0.3;
+		--bg-a2: 0.3;
+		--bd-w: 0em;
+		opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+		
+		> div {
+			font-size: 1.5em;
+		}
+	}
+
+	// main -> labels
+
+	.b-ma__labels {
+		padding-top: 0.6em;
+	}
+
+	.b-ma__la-top {
+		// none
+	}
+
+	.b-ma__la-to-text {
+		font-size: 0.85em;
+		opacity: 0.5;;
+		padding-right: 0.5em;
+	}
+
+	.b-ma__la-to-actions {
+		// none
+	}
+
+	.b-ma__la-to-action {
+		padding: 0.2em 0.4em;
+		@include clickable;
+		@include hover-forward(1.04);
+		opacity: 0.35;
+		@include swish;
+
+		> div {
+			font-size: 1em;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.b-ma__la-options {
+		padding-top: 0.3em;
+		@include no-scrollbar;
+		@include parent-row-right(0.4em);
+		overflow: auto;
+		margin-right: -0.4em;
+		margin-bottom: -0.35em;
+	}
+
+	.b-ma__la-option.card {
+		--bg-deg: to right;
+    margin-right: 0.4em;
+    margin-bottom: 0.35em;
+    @include clickable;
+    @include hover-forward(1.04);
+    padding: 0.35em 0.8em 0.3em;
+
+    > div {
+      @include swish;
+
+      &:nth-of-type(1).card {
+        height: 0.6em;
+        @include dot-card;
+        margin-right: 0.2em;
+        opacity: 0.4;
+      }
+
+      &:nth-of-type(2) {
+        font-size: 0.75em;
+        opacity: 0.4;
+      }
+    }
+
+    &.b-selected-- {
+      --bd-a: 0.3;
+
+      > div {
+        &:nth-of-type(1) {
+          opacity: 1;
+        }
+
+        &:nth-of-type(2) {
+          opacity: 1;
+        }
+      }
+    }
 	}
 
 	// main -> submit
