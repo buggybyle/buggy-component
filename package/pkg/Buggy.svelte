@@ -148,6 +148,24 @@ function resetSubmissionInput() {
 				class:white-dim--={theme === `light`}
 				class:b-submitted--={view === `submitted`}
 			>
+				<!-- main -> powered -->
+				<a
+					href="https://buggy.so"
+					target="_blank"
+					rel="noreferrer"
+					class="container  row--  row-centre--  text  card  b-ma__powered"
+					class:text-yellow--={theme === `dark`}
+					class:yellow-dark--={theme === `dark`}
+					class:text-yellow-dim--={theme === `light`}
+					class:white-dim--={theme === `light`}
+				>
+					<div>
+						<span>Powered by</span>
+						Buggy.so
+						<span>by Lefrost</span>
+					</div>
+				</a>
+
 				{#if view === `submitted`}
 					<!-- main (submitted) -> submitted -->
 					<div class="container  stretch--  col--  b-ma__submitted">
@@ -311,6 +329,11 @@ function resetSubmissionInput() {
 								class:svg-yellow--={theme === `dark`}
 								class:svg-yellow-dim--={theme === `light`}
 							/>
+							
+							<span>
+								Images,<br />
+								2MB max
+							</span>
 						</label>
 
 						<!-- main -> top -> count -->
@@ -338,8 +361,11 @@ function resetSubmissionInput() {
 						<div class="container  stretch--  col--  b-ma__attachments">
 							<!-- main -> attachments -> text -->
 							<div class="b-ma__at-text">
-								{submission_input.attachments.filter(a => a.type === `image`).length || 0}
-								images uploaded
+								<span>
+									{submission_input.attachments.filter(a => a.type === `image`).length || 0}
+									images uploaded
+								</span>
+								<span>5 maximum</span>
 							</div>
 
 							<!-- main -> attachments -> items -->
@@ -1291,6 +1317,27 @@ function resetSubmissionInput() {
   --bd-a: 0.3;
 }
 
+.b-ma__powered.card {
+  position: absolute;
+  top: unset;
+  bottom: calc(100% + 0.6em);
+  padding: 0.4em 0.8em 0.35em;
+  --bg-deg: to right;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1em;
+}
+.b-ma__powered.card > div {
+  white-space: nowrap;
+  font-size: 0.8em;
+}
+.b-ma__powered.card > div > span {
+  opacity: 0.3;
+}
+.b-ma__powered.card:hover {
+  font-size: 1.04em;
+}
+
 .b-ma__su-heading > div {
   font-size: 1.15em;
   padding-right: 0.2em;
@@ -1373,7 +1420,7 @@ function resetSubmissionInput() {
 
 .b-ma__to-upload.card {
   margin-right: 0.5em;
-  padding: 0.5em;
+  padding: 0.3em;
   border-radius: 50%;
   --bd-a: 0.1;
   cursor: pointer;
@@ -1381,13 +1428,29 @@ function resetSubmissionInput() {
 .b-ma__to-upload.card:not(.no-hover--):hover {
   transform: scale(1.04);
 }
+.b-ma__to-upload.card:hover > span {
+  opacity: 0.6;
+}
 .b-ma__to-upload.card > img {
-  height: 0.95em;
+  height: 1.1em;
+}
+.b-ma__to-upload.card > span {
+  transition-duration: 0.2s;
+  position: absolute;
+  left: unset;
+  right: calc(100% + 0.8em);
+  font-size: 0.7em;
+  opacity: 0.3;
+  white-space: nowrap;
+  text-align: right;
+  line-height: 1em;
 }
 
 .b-ma__to-count {
-  font-size: 1em;
+  font-size: 0.8em;
   opacity: 0.3;
+  min-width: 3.2em;
+  text-align: right;
 }
 
 .b-ma__input {
@@ -1422,9 +1485,14 @@ function resetSubmissionInput() {
   padding-top: 0.6em;
 }
 
-.b-ma__at-text {
+.b-ma__at-text > span {
   font-size: 0.85em;
-  opacity: 0.5;
+}
+.b-ma__at-text > span:nth-of-type(1) {
+  opacity: 0.6;
+}
+.b-ma__at-text > span:nth-of-type(2) {
+  opacity: 0.3;
 }
 
 .b-ma__at-items {

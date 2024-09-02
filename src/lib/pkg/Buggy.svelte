@@ -172,6 +172,24 @@
 				class:white-dim--={theme === `light`}
 				class:b-submitted--={view === `submitted`}
 			>
+				<!-- main -> powered -->
+				<a
+					href="https://buggy.so"
+					target="_blank"
+					rel="noreferrer"
+					class="container  row--  row-centre--  text  card  b-ma__powered"
+					class:text-yellow--={theme === `dark`}
+					class:yellow-dark--={theme === `dark`}
+					class:text-yellow-dim--={theme === `light`}
+					class:white-dim--={theme === `light`}
+				>
+					<div>
+						<span>Powered by</span>
+						Buggy.so
+						<span>by Lefrost</span>
+					</div>
+				</a>
+
 				{#if view === `submitted`}
 					<!-- main (submitted) -> submitted -->
 					<div class="container  stretch--  col--  b-ma__submitted">
@@ -335,6 +353,11 @@
 								class:svg-yellow--={theme === `dark`}
 								class:svg-yellow-dim--={theme === `light`}
 							/>
+							
+							<span>
+								Images,<br />
+								2MB max
+							</span>
 						</label>
 
 						<!-- main -> top -> count -->
@@ -362,8 +385,11 @@
 						<div class="container  stretch--  col--  b-ma__attachments">
 							<!-- main -> attachments -> text -->
 							<div class="b-ma__at-text">
-								{submission_input.attachments.filter(a => a.type === `image`).length || 0}
-								images uploaded
+								<span>
+									{submission_input.attachments.filter(a => a.type === `image`).length || 0}
+									images uploaded
+								</span>
+								<span>5 maximum</span>
 							</div>
 
 							<!-- main -> attachments -> items -->
@@ -713,6 +739,30 @@
 		}
 	}
 
+	.b-ma__powered.card {
+		position: absolute;
+		top: unset;
+		bottom: calc(100% + 0.6em);
+		padding: 0.4em 0.8em 0.35em;
+		--bg-deg: to right;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 1em;
+
+		> div {
+			white-space: nowrap;
+			font-size: 0.8em;
+			
+			> span {
+				opacity: 0.3;
+			}
+		}
+
+		&:hover {
+			font-size: 1.04em;
+		}
+	}
+
 	// main -> submitted
 
 	.b-ma__submitted {
@@ -800,20 +850,40 @@
 
 	.b-ma__to-upload.card {
 		margin-right: 0.5em;
-		padding: 0.5em;
+		padding: 0.3em;
 		border-radius: 50%;
 		--bd-a: 0.1;
 		@include clickable;
 		@include hover-forward(1.04);
 
+		&:hover {
+			> span {
+				opacity: 0.6;
+			}
+		}
+
 		> img {
-			height: 0.95em;
+			height: 1.1em;
+		}
+
+		> span {
+			@include swish;
+			position: absolute;
+			left: unset;
+			right: calc(100% + 0.8em);
+			font-size: 0.7em;
+			opacity: 0.3;
+			white-space: nowrap;
+			text-align: right;
+			line-height: 1em;
 		}
 	}
 
 	.b-ma__to-count {
-		font-size: 1em;
+		font-size: 0.8em;
 		opacity: 0.3;
+		min-width: 3.2em;
+		text-align: right;
 	}
 
 	// main -> input
@@ -834,8 +904,19 @@
 	}
 
 	.b-ma__at-text {
-		font-size: 0.85em;
-		opacity: 0.5;
+		// none
+
+		> span {
+			font-size: 0.85em;
+
+			&:nth-of-type(1) {
+				opacity: 0.6;
+			}
+
+			&:nth-of-type(2) {
+				opacity: 0.3;
+			}
+		}
 	}
 
 	.b-ma__at-items {
