@@ -374,7 +374,7 @@
 					<textarea
 						bind:value={submission_input.body}
 						placeholder="Type your {(SUBMISSION_TYPES.find(T => T.code === submission_input.type) || {}).name || `submission`}..."
-						class="container  grow--  stretch--  col--  text  b-ma__input"
+						class="container  grow--  stretch--  col--  text  b-ma__input  b-font-{(project.component_config || {}).submission_font}--"
 						class:text-white--={theme === `dark`}
 						class:text-yellow-dim--={theme === `light`}
 						maxlength={submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH}
@@ -895,6 +895,14 @@
 		padding-top: 0.5em;
 		@include no-scrollbar;
 		height: 5em;
+
+		&.b-font-handwriting-- {
+			// none, default
+		}
+
+		&.b-font-basic-- {
+			@include basic-text;
+		}
 	}
 
 	// main -> attachments
