@@ -228,6 +228,15 @@
 
 // text
 
+@mixin basic-text {
+	&, * {
+		font-family: $ff-base;
+		letter-spacing: -0.04em;
+		line-height: 1em;
+		font-weight: 600;
+	}
+}
+
 @mixin custom-text {
 	font-family: $ff-custom;
 	letter-spacing: 0.05em;

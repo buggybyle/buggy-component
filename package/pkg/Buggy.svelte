@@ -350,7 +350,7 @@ function resetSubmissionInput() {
 					<textarea
 						bind:value={submission_input.body}
 						placeholder="Type your {(SUBMISSION_TYPES.find(T => T.code === submission_input.type) || {}).name || `submission`}..."
-						class="container  grow--  stretch--  col--  text  b-ma__input"
+						class="container  grow--  stretch--  col--  text  b-ma__input  b-font-{(project.component_config || {}).submission_font}--"
 						class:text-white--={theme === `dark`}
 						class:text-yellow-dim--={theme === `light`}
 						maxlength={submission_max_length || DEFAULT_SUBMISSION_BODY_MAX_LENGTH}
@@ -1479,6 +1479,12 @@ function resetSubmissionInput() {
 .b-ma__input::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+.b-ma__input.b-font-basic--, .b-ma__input.b-font-basic-- * {
+  font-family: "DM Sans";
+  letter-spacing: -0.04em;
+  line-height: 1em;
+  font-weight: 600;
 }
 
 .b-ma__attachments {
