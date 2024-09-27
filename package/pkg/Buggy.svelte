@@ -134,8 +134,8 @@ function resetSubmissionInput() {
 		class:col-left--={x_position === `left`}
 		class:col-right--={x_position === `right`}
 		style="
-			margin-left: {x_offset_px};
-			margin-top: {y_offset_px};
+			margin-left: {x_offset_px}px;
+			margin-top: {y_offset_px}px;
 		"
 	>
 		{#if is_toggled}
