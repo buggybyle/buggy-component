@@ -134,8 +134,26 @@ function resetSubmissionInput() {
 		class:col-left--={x_position === `left`}
 		class:col-right--={x_position === `right`}
 		style="
-			margin-left: {x_offset_px}px;
-			margin-top: {y_offset_px}px;
+			top: {
+				(y_position === `top`) ?
+					`calc(2em + ${y_offset_px || 0}px)` :
+					`unset`
+			};
+			bottom: {
+				(y_position === `bottom`) ?
+					`calc(2em + ${y_offset_px || 0}px)` :
+					`unset`
+			};
+			left: {
+				(x_position === `left`) ?
+					`calc(2em + ${x_offset_px || 0}px)` :
+					`unset`
+			};
+			right: {
+				(x_position === `right`) ?
+					`calc(2em + ${x_offset_px || 0}px)` :
+					`unset`
+			};
 		"
 	>
 		{#if is_toggled}
@@ -1234,12 +1252,6 @@ function resetSubmissionInput() {
 .buggy.b-toggled-- .b-main.card {
   width: 18em;
 }
-.buggy.b-top-left-- {
-  top: 2em;
-  left: 2em;
-  bottom: unset;
-  right: unset;
-}
 .buggy.b-top-left-- > .b-main.card {
   top: 3.5em;
   left: 0;
@@ -1247,12 +1259,6 @@ function resetSubmissionInput() {
 .buggy.b-top-left-- > .b-main.card > .b-ma__submit.card {
   bottom: calc(100% + 0.7em);
   right: 0;
-}
-.buggy.b-top-right-- {
-  top: 2em;
-  left: unset;
-  bottom: unset;
-  right: 2em;
 }
 .buggy.b-top-right-- > .b-main.card {
   top: 3.5em;
@@ -1262,12 +1268,6 @@ function resetSubmissionInput() {
   bottom: calc(100% + 0.7em);
   left: 0;
 }
-.buggy.b-bottom-left-- {
-  top: unset;
-  left: 2em;
-  bottom: 2em;
-  right: unset;
-}
 .buggy.b-bottom-left-- > .b-main.card {
   bottom: 3.5em;
   left: 0;
@@ -1275,12 +1275,6 @@ function resetSubmissionInput() {
 .buggy.b-bottom-left-- > .b-main.card > .b-ma__submit.card {
   top: calc(100% + 0.7em);
   right: 0;
-}
-.buggy.b-bottom-right-- {
-  top: unset;
-  left: unset;
-  bottom: 2em;
-  right: 2em;
 }
 .buggy.b-bottom-right-- > .b-main.card {
   bottom: 3.5em;
