@@ -28,4 +28,12 @@
 	<body>
 		<div id="svelte">%sveltekit.body%</div>
 	</body>
+	<style>
+		html {
+			/* since :global(html, body, etc...) styles are disabled in all.scss to prevent component styles from interfering with client styles when imported, set any required local styles here */
+			width: 100%;
+			height: 100%;
+			background-color: black;
+		}
+	</style>
 </html>

@@ -129,7 +129,7 @@ function resetSubmissionInput() {
 }
   <!-- buggy -->
   <div
-		class="container  col--  buggy  b-{y_position}-{x_position}--"
+		class="container  col--  component  buggy  b-{y_position}-{x_position}--"
 		class:b-toggled--={is_toggled}
 		class:col-left--={x_position === `left`}
 		class:col-right--={x_position === `right`}
@@ -617,27 +617,12 @@ function resetSubmissionInput() {
 {/if}
  
 <style>@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&family=Gochi+Hand:wght@400&family=Fira+Code:wght@600&family=Rubik:wght@500&display=swap");
-:global(html) {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-:global(body),
-:global(#svelte) {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  position: relative;
-  background-color: #000000;
-  color: #FFF1C5;
-}
-
-:global(a) {
+:global(.component a) {
   color: inherit;
   text-decoration: none;
 }
 
-:global(*) {
+:global(.component *) {
   outline: none;
   margin: 0;
   font-family: "DM Sans";
@@ -650,23 +635,23 @@ function resetSubmissionInput() {
 }
 
 /* width */
-:global(::-webkit-scrollbar) {
+:global(.component ::-webkit-scrollbar) {
   width: 0em;
 }
 
 /* Track */
-:global(::-webkit-scrollbar-track) {
+:global(.component ::-webkit-scrollbar-track) {
   background: rgba(255, 241, 197, 0);
 }
 
 /* Handle */
-:global(::-webkit-scrollbar-thumb) {
+:global(.component ::-webkit-scrollbar-thumb) {
   background: rgba(255, 241, 197, 0.1);
   border-radius: 0.5em;
 }
 
 /* Handle on hover */
-:global(::-webkit-scrollbar-thumb:hover) {
+:global(.component ::-webkit-scrollbar-thumb:hover) {
   background: rgba(255, 241, 197, 0.2);
 }
 
@@ -1354,9 +1339,9 @@ function resetSubmissionInput() {
 .b-ma__buttons > img:not(:last-child),
 .b-ma__buttons > span:not(:last-child),
 .b-ma__buttons > input:not(:last-child),
-.b-ma__buttons > :global(a):not(:last-child),
-.b-ma__buttons > :global(div):not(:last-child),
-.b-ma__buttons > :global(img):not(:last-child) {
+.b-ma__buttons > :global(.component a):not(:last-child),
+.b-ma__buttons > :global(.component div):not(:last-child),
+.b-ma__buttons > :global(.component img):not(:last-child) {
   margin-right: 0.4em;
 }
 
@@ -1384,9 +1369,9 @@ function resetSubmissionInput() {
 .b-ma__to-options > img:not(:last-child),
 .b-ma__to-options > span:not(:last-child),
 .b-ma__to-options > input:not(:last-child),
-.b-ma__to-options > :global(a):not(:last-child),
-.b-ma__to-options > :global(div):not(:last-child),
-.b-ma__to-options > :global(img):not(:last-child) {
+.b-ma__to-options > :global(.component a):not(:last-child),
+.b-ma__to-options > :global(.component div):not(:last-child),
+.b-ma__to-options > :global(.component img):not(:last-child) {
   margin-right: 0.5em;
 }
 
@@ -1580,9 +1565,9 @@ function resetSubmissionInput() {
 .b-ma__la-options > img:not(:last-child),
 .b-ma__la-options > span:not(:last-child),
 .b-ma__la-options > input:not(:last-child),
-.b-ma__la-options > :global(a):not(:last-child),
-.b-ma__la-options > :global(div):not(:last-child),
-.b-ma__la-options > :global(img):not(:last-child) {
+.b-ma__la-options > :global(.component a):not(:last-child),
+.b-ma__la-options > :global(.component div):not(:last-child),
+.b-ma__la-options > :global(.component img):not(:last-child) {
   margin-right: 0.4em;
 }
 

@@ -1,36 +1,36 @@
 @import './mixins.scss';
 
-:global(html) {
-	display: flex;
-	flex-direction: column;
-	min-height: 100%;
-	// cursor: url('/images/commons/cursors/default.png'), auto;
+// :global(html) {
+// 	display: flex;
+// 	flex-direction: column;
+// 	min-height: 100%;
+// 	// cursor: url('/images/commons/cursors/default.png'), auto;
 
-	.card:hover {
-		// cursor: url('/images/commons/cursors/hover.png'), auto;
-	}
+// 	.card:hover {
+// 		// cursor: url('/images/commons/cursors/hover.png'), auto;
+// 	}
 
-	.input:hover {
-		// cursor: url('/images/commons/cursors/input.png'), auto;
-	}
-}
+// 	.input:hover {
+// 		// cursor: url('/images/commons/cursors/input.png'), auto;
+// 	}
+// }
 
-:global(body),
-:global(#svelte) {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	position: relative;
-	background-color: $black-hex;
-	color: $white-hex;
-}
+// :global(body),
+// :global(#svelte) {
+// 	display: flex;
+// 	flex-direction: column;
+// 	flex-grow: 1;
+// 	position: relative;
+// 	background-color: $black-hex;
+// 	color: $white-hex;
+// }
 
-:global(a) {
+:global(.component a) {
 	color: inherit;
 	text-decoration: none;
 }
 
-:global(*) {
+:global(.component *) {
 	outline: none;
 	margin: 0;
 	font-family: $ff-base;
@@ -43,24 +43,24 @@
 }
 
 /* width */
-:global(::-webkit-scrollbar) {
+:global(.component ::-webkit-scrollbar) {
 	// width: 0.4em;
 	width: 0em;
 }
 
 /* Track */
-:global(::-webkit-scrollbar-track) {
+:global(.component ::-webkit-scrollbar-track) {
 	background: rgba($white-hex, 0);
 }
 
 /* Handle */
-:global(::-webkit-scrollbar-thumb) {
+:global(.component ::-webkit-scrollbar-thumb) {
 	background: rgba($white-hex, 0.1);
 	border-radius: 0.5em;
 }
 
 /* Handle on hover */
-:global(::-webkit-scrollbar-thumb:hover) {
+:global(.component ::-webkit-scrollbar-thumb:hover) {
 	background: rgba($white-hex, 0.2);
 }
 

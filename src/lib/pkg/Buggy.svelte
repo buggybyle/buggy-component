@@ -153,7 +153,7 @@
 }
   <!-- buggy -->
   <div
-		class="container  col--  buggy  b-{y_position}-{x_position}--"
+		class="container  col--  component  buggy  b-{y_position}-{x_position}--"
 		class:b-toggled--={is_toggled}
 		class:col-left--={x_position === `left`}
 		class:col-right--={x_position === `right`}

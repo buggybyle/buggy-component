@@ -112,9 +112,9 @@
 	> img,
 	> span,
 	> input,
-	> :global(a),
-	> :global(div),
-	> :global(img) {
+	> :global(.component a),
+	> :global(.component div),
+	> :global(.component img) {
 		&:not(:first-child) {
 			margin-top: $parent-mg;
 		}
@@ -127,9 +127,9 @@
 	> img,
 	> span,
 	> input,
-	> :global(a),
-	> :global(div),
-	> :global(img) {
+	> :global(.component a),
+	> :global(.component div),
+	> :global(.component img) {
 		&:not(:last-child) {
 			margin-bottom: $parent-mg;
 		}
@@ -142,9 +142,9 @@
 	> img,
 	> span,
 	> input,
-	> :global(a),
-	> :global(div),
-	> :global(img) {
+	> :global(.component a),
+	> :global(.component div),
+	> :global(.component img) {
 		margin-top: $parent-mg;
 		margin-bottom: $parent-mg;
 	}
@@ -156,9 +156,9 @@
 	> img,
 	> span,
 	> input,
-	> :global(a),
-	> :global(div),
-	> :global(img) {
+	> :global(.component a),
+	> :global(.component div),
+	> :global(.component img) {
 		&:not(:first-child) {
 			margin-left: $parent-mg;
 		}
@@ -171,9 +171,9 @@
 	> img,
 	> span,
 	> input,
-	> :global(a),
-	> :global(div),
-	> :global(img) {
+	> :global(.component a),
+	> :global(.component div),
+	> :global(.component img) {
 		&:not(:last-child) {
 			margin-right: $parent-mg;
 		}
@@ -186,9 +186,9 @@
 	> img,
 	> span,
 	> input,
-	> :global(a),
-	> :global(div),
-	> :global(img) {
+	> :global(.component a),
+	> :global(.component div),
+	> :global(.component img) {
 		margin-left: $parent-mg;
 		margin-right: $parent-mg;
 	}
@@ -308,7 +308,7 @@
 		// todo
 	}
 
-	> :global(.wallet-adapter-button) {
+	> :global(.component .wallet-adapter-button) {
 		height: 100%;
 		width: 100%;
 		line-height: 1em;
@@ -321,18 +321,18 @@
 		color: var(--colour-hex);
 	}
 	
-	> :global(.wallet-adapter-button .wallet-adapter-button-start-icon) {
+	> :global(.component .wallet-adapter-button .wallet-adapter-button-start-icon) {
 		margin-right: 0.6em;
 		width: unset;
 		height: unset;
 	}
 
-	> :global(.wallet-adapter-button .wallet-adapter-button-start-icon > img) {
+	> :global(.component .wallet-adapter-button .wallet-adapter-button-start-icon > img) {
 		width: 1.2em;
 		height: 1.2em;
 	}
 
-	> :global(.wallet-adapter-modal) {
+	> :global(.component .wallet-adapter-modal) {
 		position: absolute;
 		background-color: rgba($black-hex, 1);
 		// width: 100%;
@@ -347,22 +347,22 @@
 		border-radius: 0.2em;
 	}
 
-	> :global(.wallet-adapter-modal *) {
+	> :global(.component .wallet-adapter-modal *) {
 		font-family: $ff-base;
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-modal-container) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-modal-container) {
 		margin: 0;
 		min-height: unset;
 		// padding-top: 1em;
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-modal-wrapper) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-modal-wrapper) {
 		background: none;
 		margin-bottom: -1em;
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-modal-button-close) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-modal-button-close) {
 		font-size: 0.55em;
 		top: -0.2em;
 		right: -0.2em;
@@ -372,7 +372,7 @@
 		background-color: rgba($white-hex, 0.05);
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-modal-title) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-modal-title) {
 		font-size: 0.6em;
 		line-height: 1.3em;
 		padding: 0;
@@ -382,11 +382,11 @@
 		color: var(--colour-hex);
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-modal-list) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-modal-list) {
 		padding-top: 1em;
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-button) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-button) {
 		font-size: 0.8em;
 		height: unset;
 		padding: 0.2em;
@@ -394,29 +394,29 @@
 		line-height: 1em;
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-button > span) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-button > span) {
 		font-size: 0.6em;
 		color: var(--colour-hex);
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-button-start-icon) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-button-start-icon) {
 		margin-right: 0.3em;
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-button-start-icon > img) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-button-start-icon > img) {
 		width: 1.4em;
 		height: 1.4em;
 	}
 
-	> :global(.wallet-adapter-modal .wallet-adapter-modal-list-more) {
+	> :global(.component .wallet-adapter-modal .wallet-adapter-modal-list-more) {
 		display: none;
 	}
 
-	> :global(.wallet-adapter-dropdown) {
+	> :global(.component .wallet-adapter-dropdown) {
 		// none
 	}
 	
-	> :global(.wallet-adapter-dropdown .wallet-adapter-button) {
+	> :global(.component .wallet-adapter-dropdown .wallet-adapter-button) {
 		background-color: transparent;
 		font-family: $ff-base;
 		color: var(--colour-hex);
@@ -427,22 +427,22 @@
 		padding: 0.6em 0.8em;
 	}
 	
-	> :global(.wallet-adapter-dropdown .wallet-adapter-button *) {
+	> :global(.component .wallet-adapter-dropdown .wallet-adapter-button *) {
 		font-family: $ff-base;
 	}
 
-	> :global(.wallet-adapter-dropdown .wallet-adapter-button > i) {
+	> :global(.component .wallet-adapter-dropdown .wallet-adapter-button > i) {
 		margin-right: 0.6em;
 		width: unset;
 		height: unset;
 	}
 
-	> :global(.wallet-adapter-dropdown .wallet-adapter-button > i > img) {
+	> :global(.component .wallet-adapter-dropdown .wallet-adapter-button > i > img) {
 		width: 1.2em;
 		height: 1.2em;
 	}
 
-	> :global(.wallet-adapter-dropdown .wallet-adapter-dropdown-list) {
+	> :global(.component .wallet-adapter-dropdown .wallet-adapter-dropdown-list) {
 		padding: 0.6em;
 		width: calc(100% - 0.6em * 2);
 		border: 0.13em solid rgba(var(--colour), 0.3);
@@ -451,7 +451,7 @@
 		grid-row-gap: 0;
 	}
 
-	> :global(.wallet-adapter-dropdown .wallet-adapter-dropdown-list-item) {
+	> :global(.component .wallet-adapter-dropdown .wallet-adapter-dropdown-list-item) {
 		height: unset;
 		text-align: left;
 		justify-content: flex-start;
